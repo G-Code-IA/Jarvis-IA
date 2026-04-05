@@ -220,6 +220,16 @@ class AgentCore:
                 "params": [],
                 "category": "system"
             },
+            "create_project": {
+                "description": "Crear proyecto completo desde plantilla",
+                "params": ["description"],
+                "category": "development"
+            },
+            "list_templates": {
+                "description": "Listar plantillas de proyectos disponibles",
+                "params": [],
+                "category": "development"
+            },
             "chat": {
                 "description": "Conversación general con IA",
                 "params": ["message"],
@@ -573,6 +583,9 @@ class AgentCore:
     
     def _classify_intent(self, msg_lower: str) -> str:
         """Clasificar la intención del mensaje."""
+        # Proyectos primero (antes que greeting)
+        if any(x in msg_lower for x in ["crea un proyecto", "crear proyecto", "crea una app", "crear una app", "crea un juego", "crear un juego", "crea una api", "crear una api", "crea un programa", "crear un programa"]):
+            return "command"
         if any(x in msg_lower for x in ["hola", "hey", "buenas", "buenos"]):
             return "greeting"
         if any(x in msg_lower for x in ["gracias", "thanks"]):
@@ -732,6 +745,10 @@ class AgentCore:
             return "list_plugins"
         if any(x in msg_lower for x in ["foto", "cámara"]):
             return "take_photo"
+        if any(x in msg_lower for x in ["crea un proyecto", "crear proyecto", "crea una app", "crear una app", "crea un juego"]):
+            return "create_project"
+        if any(x in msg_lower for x in ["plantillas", "templates", "qué proyectos"]):
+            return "list_templates"
         
         return None
     
@@ -792,6 +809,29 @@ class AgentCore:
                 camera = CameraTools()
                 result = camera.take_photo()
                 return {"success": result is not None, "response": result or "❌ No se pudo tomar foto"}
+            
+            elif tool_name == "create_project":
+                from project_generator import project_generator
+                project = project_generator.create_project(user_input)
+                
+                if project.get("success"):
+                    response = f"✅ **Proyecto creado: {project['name']}**\n\n"
+                    response += f"📦 Tipo: {project['type']}\n"
+                    response += f"📄 Archivos: {project['file_count']}\n"
+                    response += f"💾 Tamaño: {project['total_size']/1024:.1f} KB\n"
+                    response += f"📁 Directorio: `{project['directory']}`\n\n"
+                    response += "**Archivos creados:**\n"
+                    for f in project['created_files'][:10]:
+                        response += f"  • {f}\n"
+                    if len(project['created_files']) > 10:
+                        response += f"  ... y {len(project['created_files'])-10} más\n"
+                    response += f"\n{project.get('instructions', '')}"
+                    return {"success": True, "response": response}
+                return {"success": False, "response": "❌ No se pudo crear el proyecto"}
+            
+            elif tool_name == "list_templates":
+                from project_generator import project_generator
+                return {"success": True, "response": project_generator.list_templates()}
             
             elif tool_name == "chat":
                 return self._chat_with_ollama(user_input)

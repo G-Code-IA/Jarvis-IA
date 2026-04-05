@@ -1,5 +1,24 @@
 {
-  "facts": [],
+  "facts": [
+    {
+      "question": "Analiza https://github.com/luanti-org/luanti",
+      "answer": "\ud83d\udcca **An\u00e1lisis de luanti-org/luanti**\n\n\ud83d\udcdd **Descripci\u00f3n:** Luanti (formerly Minetest) is an open source voxel game-creation platform with easy modding and game creation\n\u2b50 **Stars:** 12520\n\ud83c\udf74 **Forks:** 22",
+      "timestamp": "2026-04-04T23:44:53.481583",
+      "confidence": 0.5
+    },
+    {
+      "question": "crea un proyecto completo de una API web",
+      "answer": "No estoy seguro de c\u00f3mo ayudarte con eso. \u00bfPuedes preguntar de otra forma? \ud83e\udd14",
+      "timestamp": "2026-04-04T23:52:09.599916",
+      "confidence": 0.5
+    },
+    {
+      "question": "crea un proyecto de una API web",
+      "answer": "\u2705 **Proyecto creado: mi_api**\n\n\ud83d\udce6 Tipo: python_web_api\n\ud83d\udcc4 Archivos: 6\n\ud83d\udcbe Tama\u00f1o: 3.0 KB\n\ud83d\udcc1 Directorio: `/data/data/com.termux/files/home/Jarvis/projects/mi_api`\n\n**Archivos creados:**\n  \u2022 README.md\n  \u2022 re",
+      "timestamp": "2026-04-04T23:53:35.676112",
+      "confidence": 0.5
+    }
+  ],
   "procedures": [],
   "preferences": {}
 }

@@ -21,5 +21,82 @@
       "La estrategia funcion\u00f3 correctamente"
     ],
     "confidence": 0.8
+  },
+  {
+    "timestamp": "2026-04-04T23:44:53.481492",
+    "input": "Analiza https://github.com/luanti-org/luanti",
+    "intent": "command",
+    "success": true,
+    "tool_used": "analyze_github",
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.7
+  },
+  {
+    "timestamp": "2026-04-04T23:44:57.130778",
+    "input": "toma una foto",
+    "intent": "conversation",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.6
+  },
+  {
+    "timestamp": "2026-04-04T23:45:04.498745",
+    "input": "Hola",
+    "intent": "greeting",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.8
+  },
+  {
+    "timestamp": "2026-04-04T23:45:12.957214",
+    "input": "\u00bfC\u00f3mo est\u00e1s?",
+    "intent": "question",
+    "success": false,
+    "tool_used": "search_web",
+    "reflection": [
+      "La estrategia fall\u00f3, necesito ajustar"
+    ],
+    "confidence": 0.7
+  },
+  {
+    "timestamp": "2026-04-04T23:45:21.336346",
+    "input": "\u00bfQuien eres?",
+    "intent": "question",
+    "success": false,
+    "tool_used": "search_web",
+    "reflection": [
+      "La estrategia fall\u00f3, necesito ajustar"
+    ],
+    "confidence": 0.7
+  },
+  {
+    "timestamp": "2026-04-04T23:52:09.599725",
+    "input": "crea un proyecto completo de una API web",
+    "intent": "conversation",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.6
+  },
+  {
+    "timestamp": "2026-04-04T23:53:35.676064",
+    "input": "crea un proyecto de una API web",
+    "intent": "command",
+    "success": true,
+    "tool_used": "create_project",
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.7
   }
 ]
