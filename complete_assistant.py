@@ -19,7 +19,7 @@ sys.path.insert(0, WORKING_DIR)
 
 from model_manager import model_manager, ModelManager
 from agent_core import agent_core, AgentCore
-from autonomous_agent import autonomous_agent, AutonomousAgent
+from autonomous_agent import autonomous_agent_v2 as autonomous_agent, AutonomousAgentV2 as AutonomousAgent
 from conversational_engine import conversational_engine, ConversationalEngine
 
 

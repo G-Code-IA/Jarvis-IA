@@ -44,7 +44,7 @@ from reasoning_engine import reasoning_engine, ReasoningEngine
 from conversational_engine import conversational_engine, ConversationalEngine
 from ironman_module import ironman_module, IronManModule
 from agent_core import agent_core, AgentCore
-from autonomous_agent import autonomous_agent, AutonomousAgent
+from autonomous_agent import autonomous_agent_v2 as autonomous_agent, AutonomousAgentV2 as AutonomousAgent
 from model_manager import model_manager, ModelManager
 from complete_assistant import complete_assistant, CompleteAIAssistant
 
