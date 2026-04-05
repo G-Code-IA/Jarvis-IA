@@ -147,6 +147,30 @@ class ConversationalEngine:
             understanding["type"] = "action"
             understanding["intent"] = "take_photo"
         
+        elif any(x in msg_lower for x in ["diagnóstico", "diagnostico", "traje", "suit"]):
+            understanding["type"] = "action"
+            understanding["intent"] = "ironman_diagnostic"
+        
+        elif any(x in msg_lower for x in ["seguridad", "security", "amenazas"]):
+            understanding["type"] = "action"
+            understanding["intent"] = "ironman_security"
+        
+        elif any(x in msg_lower for x in ["análisis táctico", "analisis tactico", "situación"]):
+            understanding["type"] = "action"
+            understanding["intent"] = "ironman_tactical"
+        
+        elif any(x in msg_lower for x in ["taller", "workshop", "mis proyectos"]):
+            understanding["type"] = "action"
+            understanding["intent"] = "ironman_workshop"
+        
+        elif any(x in msg_lower for x in ["crear backup", "hacer backup", "respaldo"]):
+            understanding["type"] = "action"
+            understanding["intent"] = "ironman_backup"
+        
+        elif any(x in msg_lower for x in ["iron man", "modo iron", "protocolos"]):
+            understanding["type"] = "action"
+            understanding["intent"] = "ironman_menu"
+        
         elif any(x in msg_lower for x in ["plugins", "extensiones"]):
             understanding["type"] = "action"
             understanding["intent"] = "list_plugins"
@@ -300,6 +324,50 @@ class ConversationalEngine:
                 camera = CameraTools()
                 result = camera.take_photo()
                 return {"success": result is not None, "result": result or "No se pudo tomar foto"}
+            
+            elif intent == "ironman_diagnostic":
+                from ironman_module import IronManModule
+                module = IronManModule()
+                scan = module.suit.full_system_scan()
+                return {"success": True, "result": module.suit.format_diagnostic_report(scan)}
+            
+            elif intent == "ironman_security":
+                from ironman_module import IronManModule
+                module = IronManModule()
+                scan = module.threats.scan_network()
+                return {"success": True, "result": module.threats.format_threat_report(scan)}
+            
+            elif intent == "ironman_tactical":
+                from ironman_module import IronManModule
+                module = IronManModule()
+                analysis = module.tactical.analyze_situation()
+                return {"success": True, "result": module.tactical.format_tactical_report(analysis)}
+            
+            elif intent == "ironman_workshop":
+                from ironman_module import IronManModule
+                module = IronManModule()
+                projects = module.workshop.list_projects()
+                return {"success": True, "result": module.workshop.format_workshop_report(projects)}
+            
+            elif intent == "ironman_backup":
+                from ironman_module import IronManModule
+                module = IronManModule()
+                result = module.backup.create_backup()
+                return {"success": True, "result": f"✅ Backup creado: {result['count']} archivos en {result['path']}"}
+            
+            elif intent == "ironman_menu":
+                return {
+                    "success": True,
+                    "result": (
+                        "🦾 **PROTOCOLOS IRON MAN**\n\n"
+                        "🔧 **diagnóstico** - Escaneo del sistema\n"
+                        "🛡️ **seguridad** - Escaneo de amenazas\n"
+                        "🎯 **análisis táctico** - Reporte de situación\n"
+                        "📁 **taller** - Proyectos activos\n"
+                        "💾 **crear backup** - Respaldo de datos\n\n"
+                        "¿Qué necesitas, señor?"
+                    )
+                }
             
             elif intent == "search_web":
                 import re

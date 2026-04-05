@@ -42,6 +42,7 @@ from camera_module import CameraTools
 from ai_developer import AIDeveloper, CodeAnalyzer, CodeOptimizer
 from reasoning_engine import reasoning_engine, ReasoningEngine
 from conversational_engine import conversational_engine, ConversationalEngine
+from ironman_module import ironman_module, IronManModule
 
 # ==================== CONFIGURACIÓN ====================
 
