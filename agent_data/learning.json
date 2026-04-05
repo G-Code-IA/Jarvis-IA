@@ -131,5 +131,28 @@
       "La estrategia funcion\u00f3 correctamente"
     ],
     "confidence": 0.6
+  },
+  {
+    "timestamp": "2026-04-05T00:20:35.933991",
+    "input": "hola",
+    "intent": "greeting",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.8
+  },
+  {
+    "timestamp": "2026-04-05T00:20:36.484486",
+    "input": "bater\u00eda",
+    "intent": "command",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente",
+      "Subestim\u00e9 mi capacidad - deber\u00eda tener m\u00e1s confianza"
+    ],
+    "confidence": 0.3
   }
 ]

@@ -680,6 +680,11 @@ class AgentCore:
         if any(x in msg_lower for x in ["hola", "hey", "buenas"]):
             return {"is_ambiguous": False}
         
+        # No marcar comandos conocidos de una palabra
+        single_word_commands = ["batería", "battery", "diagnóstico", "seguridad", "plugins", "memoria", "status", "taller", "backup", "fotos", "foto", "captura", "sistema", "procesos", "ayuda", "help"]
+        if msg_lower.strip() in single_word_commands:
+            return {"is_ambiguous": False}
+        
         if len(msg_lower.split()) < 2:
             return {"is_ambiguous": True, "reason": "Mensaje muy corto"}
         return {"is_ambiguous": False}
