@@ -1,0 +1,70 @@
+# J.A.R.V.I.S. - AI Assistant
+# Archivos que NO deben subirse al repo
+
+# Bases de datos (contienen datos personales)
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs (pueden contener información sensible)
+*.log
+
+# Archivos de cámara (fotos personales)
+camera/
+*.jpg
+*.png
+*.jpeg
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+*.egg/
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+temp_*.py
+temp_*
+
+# Perfil de usuario (datos personales)
+user_profile.json
+personality.json
+
+# Plugins descargados
+plugins/
+
+# Flutter build (se generan localmente)
+flutter_app/build/
+flutter_app/.dart_tool/
+flutter_app/.flutter-plugins
+flutter_app/.flutter-plugins-dependencies
+flutter_app/android/.gradle/
+flutter_app/android/app/src/main/AndroidManifest.xml.bak
+
+# Node modules (si se usa en web)
+node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# API keys (nunca subir tokens)
+*.key
+*.pem

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.A.R.V.I.S. BRAIN Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #eee;
+            min-height: 100vh;
+        }
+        .container { max-width: 1600px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        header {
+            background: rgba(0,217,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 1px solid rgba(0,217,255,0.3);
+            box-shadow: 0 0 30px rgba(0,217,255,0.2);
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #00d9ff;
+            text-shadow: 0 0 10px rgba(0,217,255,0.5);
+        }
+        .brain-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(0,255,136,0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(0,255,136,0.3);
+        }
+        .brain-dot {
+            width: 12px;
+            height: 12px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        .status {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .status-item {
+            background: rgba(0,217,255,0.1);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border-left: 3px solid #00d9ff;
+            font-size: 14px;
+        }
+        
+        /* Brain Visualization */
+        .brain-viz {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .brain-card {
+            background: rgba(0,217,255,0.05);
+            border: 1px solid rgba(0,217,255,0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .brain-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,217,255,0.3);
+        }
+        .brain-card .icon { font-size: 40px; margin-bottom: 10px; }
+        .brain-card .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00d9ff;
+        }
+        .brain-card .label {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+        
+        /* Cards */
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .card h2 {
+            color: #00d9ff;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        /* Chat */
+        .chat-container {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .message {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            word-wrap: break-word;
+        }
+        .message.user {
+            background: rgba(0,217,255,0.2);
+            border-left: 3px solid #00d9ff;
+        }
+        .message.brain {
+            background: rgba(0,255,136,0.1);
+            border-left: 3px solid #00ff88;
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 14px;
+        }
+        .chat-input input:focus {
+            outline: none;
+            border-color: #00d9ff;
+        }
+        .chat-input button {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #00d9ff 0%, #00ff88 100%);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Interfaces */
+        .interfaces-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .interface-item {
+            padding: 15px;
+            background: rgba(0,217,255,0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(0,217,255,0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .interface-icon {
+            font-size: 30px;
+        }
+        .interface-info {
+            flex: 1;
+        }
+        .interface-name {
+            font-weight: bold;
+            color: #00d9ff;
+        }
+        .interface-status {
+            font-size: 12px;
+            color: #00ff88;
+        }
+        
+        /* Terminal */
+        .terminal {
+            background: #0a0a0a;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid rgba(0,255,136,0.2);
+        }
+        .terminal-line {
+            margin-bottom: 5px;
+            color: #00ff88;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <span class="logo">🧠 J.A.R.V.I.S. BRAIN</span>
+                <span style="color: #00ff88; margin-left: 10px;">v3.0</span>
+            </div>
+            <div class="brain-indicator">
+                <div class="brain-dot"></div>
+                <span id="brain-status">Cerebro Online</span>
+            </div>
+            <div class="status">
+                <div class="status-item">
+                    <span id="clients-count">0</span> Clientes
+                </div>
+                <div class="status-item">
+                    <span id="commands-count">0</span> Comandos
+                </div>
+            </div>
+        </header>
+        
+        <!-- Brain Visualization -->
+        <div class="brain-viz">
+            <div class="brain-card">
+                <div class="icon">🧠</div>
+                <div class="value" id="memories-count">0</div>
+                <div class="label">Memorias</div>
+            </div>
+            <div class="brain-card">
+                <div class="icon">📈</div>
+                <div class="value" id="patterns-count">0</div>
+                <div class="label">Patrones</div>
+            </div>
+            <div class="brain-card">
+                <div class="icon">🔌</div>
+                <div class="value" id="plugins-count">0</div>
+                <div class="label">Plugins</div>
+            </div>
+            <div class="brain-card">
+                <div class="icon">⏰</div>
+                <div class="value" id="tasks-count">0</div>
+                <div class="label">Tareas</div>
+            </div>
+            <div class="brain-card">
+                <div class="icon">📊</div>
+                <div class="value" id="success-rate">0%</div>
+                <div class="label">Éxito</div>
+            </div>
+            <div class="brain-card">
+                <div class="icon">⚡</div>
+                <div class="value" id="avg-time">0s</div>
+                <div class="label">Tiempo Prom.</div>
+            </div>
+        </div>
+        
+        <div class="grid">
+            <!-- Chat -->
+            <div class="card chat-container">
+                <h2>💬 Centro de Comandos - Conectado al BRAIN</h2>
+                <div class="chat-messages" id="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="command-input" placeholder="Escribe un comando al BRAIN..." onkeypress="if(event.key==='Enter') sendCommand()">
+                    <button onclick="sendCommand()">Enviar al BRAIN</button>
+                </div>
+            </div>
+            
+            <!-- Interfaces -->
+            <div class="card">
+                <h2>🔗 Interfaces Conectadas</h2>
+                <div class="interfaces-list" id="interfaces-list">
+                    <div class="interface-item">
+                        <div class="interface-icon">📱</div>
+                        <div class="interface-info">
+                            <div class="interface-name">Telegram Bot</div>
+                            <div class="interface-status" id="telegram-status">● Conectado</div>
+                        </div>
+                    </div>
+                    <div class="interface-item">
+                        <div class="interface-icon">🌐</div>
+                        <div class="interface-info">
+                            <div class="interface-name">Web Dashboard</div>
+                            <div class="interface-status">● Conectado (Tú)</div>
+                        </div>
+                    </div>
+                    <div class="interface-item">
+                        <div class="interface-icon">📲</div>
+                        <div class="interface-info">
+                            <div class="interface-name">Android App</div>
+                            <div class="interface-status" id="app-status">○ Esperando</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2 style="margin-top: 20px;">📊 Actividad en Tiempo Real</h2>
+                <div class="terminal" id="terminal"></div>
+            </div>
+        </div>
+        
+        <footer>
+            J.A.R.V.I.S. BRAIN v3.0 - Cerebro Central Unificado<br>
+            Conectando: Telegram • Web Dashboard • Android App<br>
+            Memoria Compartida • Aprendizaje Continuo • Plugins Ilimitados
+        </footer>
+    </div>
+    
+    <script>
+        const BRAIN_URL = window.location.origin;
+        let ws = null;
+        let clientId = 'web_' + Math.random().toString(36).substr(2, 9);
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            connectWebSocket();
+            loadBrainStatus();
+            addToTerminal('Conectado al J.A.R.V.I.S. BRAIN v3.0');
+            
+            // Auto-refresh
+            setInterval(loadBrainStatus, 10000);
+        });
+        
+        function connectWebSocket() {
+            const wsUrl = `ws://${window.location.hostname}:8000/ws/${clientId}`;
+            ws = new WebSocket(wsUrl);
+            
+            ws.onopen = () => {
+                document.getElementById('brain-status').textContent = 'Cerebro Conectado';
+                addToTerminal('WebSocket conectado al BRAIN');
+            };
+            
+            ws.onclose = () => {
+                document.getElementById('brain-status').textContent = 'Reconectando...';
+                setTimeout(connectWebSocket, 3000);
+            };
+            
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                
+                if (data.type === 'response') {
+                    addMessage(data.data.command, data.data.response);
+                    addToTerminal(`Comando: ${data.data.command.substring(0, 50)}...`);
+                }
+                
+                if (data.type === 'event') {
+                    const event = data.event;
+                    if (event.event_type === 'command_executed') {
+                        addToTerminal(`[${event.source}] ${event.data.command.substring(0, 40)}...`);
+                    }
+                }
+            };
+        }
+        
+        function sendCommand() {
+            const input = document.getElementById('command-input');
+            const command = input.value.trim();
+            if (!command) return;
+            
+            addMessage(command, null);
+            input.value = '';
+            
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({
+                    type: 'command',
+                    command: command,
+                    user_id: 8406954800,
+                    context: {}
+                }));
+            } else {
+                fetch(`${BRAIN_URL}/brain/command`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        command: command,
+                        interface: 'web',
+                        user_id: 8406954800
+                    })
+                })
+                .then(r => r.json())
+                .then(data => addMessage(command, data.response))
+                .catch(e => addMessage(command, 'Error: ' + e.message));
+            }
+        }
+        
+        function addMessage(user, response) {
+            const container = document.getElementById('chat-messages');
+            
+            if (user) {
+                const userMsg = document.createElement('div');
+                userMsg.className = 'message user';
+                userMsg.textContent = user;
+                container.appendChild(userMsg);
+            }
+            
+            if (response) {
+                const brainMsg = document.createElement('div');
+                brainMsg.className = 'message brain';
+                brainMsg.textContent = response;
+                container.appendChild(brainMsg);
+            }
+            
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function addToTerminal(text) {
+            const terminal = document.getElementById('terminal');
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            line.textContent = `[${new Date().toLocaleTimeString()}] ${text}`;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+        
+        function loadBrainStatus() {
+            fetch(`${BRAIN_URL}/brain/status`)
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById('clients-count').textContent = data.connected_clients || 0;
+                    document.getElementById('commands-count').textContent = data.total_commands || 0;
+                    document.getElementById('memories-count').textContent = data.memory?.long_term_count || 0;
+                    document.getElementById('patterns-count').textContent = data.learning?.learned_patterns || 0;
+                    document.getElementById('plugins-count').textContent = data.plugins?.loaded_plugins || 0;
+                    document.getElementById('tasks-count').textContent = data.automation?.active_tasks || 0;
+                    document.getElementById('success-rate').textContent = ((data.learning?.success_rate || 0) * 100).toFixed(0) + '%';
+                    document.getElementById('avg-time').textContent = (data.learning?.avg_execution_time || 0).toFixed(1) + 's';
+                    
+                    // Actualizar interfaces
+                    const interfaces = data.active_interfaces || [];
+                    document.getElementById('telegram-status').textContent = 
+                        interfaces.includes('telegram') ? '● Conectado' : '○ Desconectado';
+                    document.getElementById('app-status').textContent = 
+                        interfaces.includes('app') ? '● Conectado' : '○ Esperando';
+                })
+                .catch(console.error);
+        }
+    </script>
+</body>
+</html>
