@@ -45,6 +45,7 @@ from conversational_engine import conversational_engine, ConversationalEngine
 from ironman_module import ironman_module, IronManModule
 from agent_core import agent_core, AgentCore
 from autonomous_agent import autonomous_agent, AutonomousAgent
+from model_manager import model_manager, ModelManager
 
 # ==================== CONFIGURACIÓN ====================
 
@@ -513,6 +514,36 @@ async def stop_autonomous_mode():
 async def get_autonomous_status():
     """Estado del modo autónomo"""
     return autonomous_agent.get_autonomous_status()
+
+@app.get("/brain/models")
+async def list_models():
+    """Listar modelos disponibles"""
+    return model_manager.list_available_models()
+
+@app.get("/brain/models/status")
+async def get_models_status():
+    """Estado de modelos"""
+    return model_manager.get_status()
+
+@app.get("/brain/models/recommendations")
+async def get_model_recommendations():
+    """Recomendaciones de modelos"""
+    return {"recommendations": model_manager.get_model_recommendations()}
+
+@app.post("/brain/models/install")
+async def install_model(model_name: str):
+    """Instalar modelo"""
+    return model_manager.install_model(model_name)
+
+@app.post("/brain/models/set-default")
+async def set_default_model(model_name: str):
+    """Cambiar modelo por defecto"""
+    return model_manager.set_default_model(model_name)
+
+@app.post("/brain/models/set-task")
+async def set_task_model(task: str, model_name: str):
+    """Cambiar modelo para tarea"""
+    return model_manager.set_task_model(task, model_name)
 
 # ==================== STATIC FILES ====================
 

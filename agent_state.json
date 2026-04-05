@@ -1763,10 +1763,10 @@
   "memories": [],
   "preferences": {},
   "started_at": "2026-04-05T00:30:17.682451",
-  "last_active": "2026-04-05T11:04:15.153001",
+  "last_active": "2026-04-05T11:04:31.130007",
   "autonomous_mode": true,
   "last_observation": {
-    "timestamp": "2026-04-05T11:04:13.753995",
+    "timestamp": "2026-04-05T11:04:30.157994",
     "system_status": {
       "status": "unknown",
       "battery": 73,
@@ -1785,26 +1785,26 @@
     {
       "type": "situaci\u00f3n_actual",
       "content": "Sistema: bater\u00eda=73, hora=ma\u00f1ana",
-      "timestamp": "2026-04-05T11:04:15.144523",
-      "confidence": 0.7521628564773384
+      "timestamp": "2026-04-05T11:04:31.122758",
+      "confidence": 0.8997423901729034
     },
     {
       "type": "posibles_acciones",
       "content": "Puedo usar: check_system, analyze_github, create_project, search_web, take_photo",
-      "timestamp": "2026-04-05T11:04:15.144556",
-      "confidence": 0.8798553497095569
+      "timestamp": "2026-04-05T11:04:31.122793",
+      "confidence": 0.5395026997801912
     },
     {
       "type": "aprendizaje_reciente",
       "content": "Tengo 349 conocimientos almacenados",
-      "timestamp": "2026-04-05T11:04:15.144571",
-      "confidence": 0.6227155720652668
+      "timestamp": "2026-04-05T11:04:31.122808",
+      "confidence": 0.8509408408592536
     },
     {
       "type": "estado_interno",
       "content": "Estado de \u00e1nimo: focused",
-      "timestamp": "2026-04-05T11:04:15.144579",
-      "confidence": 0.590381375643108
+      "timestamp": "2026-04-05T11:04:31.122815",
+      "confidence": 0.7640821642777004
     }
   ],
   "last_battery_alert": "2026-04-05T00:37:05.644479",

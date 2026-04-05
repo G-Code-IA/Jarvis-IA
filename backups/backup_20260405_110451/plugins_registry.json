@@ -1,0 +1,74 @@
+{
+  "system_extended": {
+    "id": "system_extended",
+    "name": "System Extended",
+    "version": "2.0.0",
+    "description": "Funciones extendidas de sistema",
+    "author": "J.A.R.V.I.S.",
+    "file": "",
+    "enabled": true,
+    "commands": [
+      "cpu",
+      "memory",
+      "network",
+      "processes"
+    ],
+    "dependencies": [],
+    "installed": "2026-04-05T00:30:17.692698",
+    "updated": "2026-04-05T00:30:17.692716"
+  },
+  "network_tools": {
+    "id": "network_tools",
+    "name": "Network Tools",
+    "version": "1.5.0",
+    "description": "Herramientas de red avanzadas",
+    "author": "J.A.R.V.I.S.",
+    "file": "",
+    "enabled": true,
+    "commands": [
+      "ping",
+      "scan",
+      "speedtest",
+      "dns"
+    ],
+    "dependencies": [],
+    "installed": "2026-04-05T00:30:17.693552",
+    "updated": "2026-04-05T00:30:17.693575"
+  },
+  "integrations": {
+    "id": "integrations",
+    "name": "Integrations",
+    "version": "1.0.0",
+    "description": "Integraciones con servicios externos",
+    "author": "J.A.R.V.I.S.",
+    "file": "",
+    "enabled": true,
+    "commands": [
+      "github",
+      "weather",
+      "crypto",
+      "translate"
+    ],
+    "dependencies": [],
+    "installed": "2026-04-05T00:30:17.694045",
+    "updated": "2026-04-05T00:30:17.694057"
+  },
+  "dev_tools": {
+    "id": "dev_tools",
+    "name": "Dev Tools",
+    "version": "1.0.0",
+    "description": "Herramientas para desarrolladores",
+    "author": "J.A.R.V.I.S.",
+    "file": "",
+    "enabled": true,
+    "commands": [
+      "git_clone",
+      "pip_install",
+      "file_tree",
+      "code_stats"
+    ],
+    "dependencies": [],
+    "installed": "2026-04-05T00:30:17.695737",
+    "updated": "2026-04-05T00:30:17.695770"
+  }
+}
