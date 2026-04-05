@@ -1,0 +1,45 @@
+{
+  "queries": {
+    "b40788f566d1124a95169068077031a9": {
+      "results": {
+        "query": "IA",
+        "sources": [
+          "Wikipedia",
+          "News"
+        ],
+        "summary": "La inteligencia artificial, abreviado como IA o AI, en el contexto de las ciencias de la computaci\u00f3n, es una disciplina y un conjunto de capacidades cognoscitivas e intelectuales expresadas por sistemas inform\u00e1ticos o combinaciones de algoritmos cuyo prop\u00f3sito es la creaci\u00f3n de m\u00e1quinas que imiten la inteligencia humana.",
+        "links": [],
+        "timestamp": "2026-04-05T11:53:28.262784",
+        "news": [
+          {
+            "title": "\u00c9ric Sadin: \u201cLa IA apesta a muerte\u201d - EL PA\u00cdS",
+            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5nQjRSdkJFUEN4cWlKdERDUTN1S285OUQ4WFNjbUtxTTdiX2Q2X2JJY25VNEk4Z2x1Y3BiVDBnemJCb0VBdnhHakVqX3B0b0lmOTNCZVRiTHBwMlJFaTktYmVnUXFDdm5KTXdKYXY5WDdsS2N3ejY5dTBYbXRpd9IBkgFBVV95cUxOWnoweDNpbmdFV3pDRHNsSFBQZnpWLWs4QUtzTTRlamtvM2VPanctSXZUTE9Sb2FNamU1QjduYmwyeG5GenN6QVVtM2x1djg3d2o5RE5IeHJhamJvX2tZbjlqd0huRzUzcWhRVGIzU3dIR3p1OGgtSDV0UjBtSDIyd1FMelB5REJNNV9BMGtZeUk2UQ?oc=5",
+            "source": "Google News"
+          },
+          {
+            "title": "64 cursos gratis para IA con Claude, ChatGPT, Gemini y Copilot creados por sus propias empresas - Xataka",
+            "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPTUNMc0x5Q2Y4NVdCX0lWbGd3T3M1Qm9qWUpmaG9tN3pVbUNhaXNTQlZoT0tfMkF6dE9QdW5aSHJaaFA4RlM1Z1d3SkZuVEtIMGM2ZG4xT2FZX285c1R5b1VEUUMtY25UMXNUdmdIZk5QQXo3WXg1TTJzajFaTE01eVhzdEtDaWUxMEdjcVFEb3lSLWgxQ3FKZmgwTHI3MDFPTFNRLUI3SGVLSzNnaVNPRldzTdIBuAFBVV95cUxQM3dSdmRKVzNFQ0pWOWhPZ1JtQVhMSGd4SV9uTF9qS09FcUZiQkNRbXR2SkVud0xuMjdiSlNoUWpjazZkOUExTjFRZVlGbnRwTmZIRXlDVHNyUkUwaGwyVFRJWnFDci04WHp6NHRuc0s2aVVyUWVseXoyb2Z6N212N2hCbTVjSVZJYnk0X3owRURLN1dfU0RzVXFudFZSWlVJQUhwLV81dHBJblNPQlk4ZXRrUXRaeGFr?oc=5",
+            "source": "Google News"
+          },
+          {
+            "title": "La apuesta sin precedentes de Amazon por recuperar su liderazgo de la mano de la IA podr\u00eda salirle bien - ABC",
+            "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxORG9zZlMxSHRXZVRUMjRMNm5KLV9fMVhONUE0WXZVb2lRdlRYbEFMUU5vZ1VNRXhraDdERzZLbFdDREhGM2hGTWo2ZzRwMEtPTk9weDV0cHdVLURCdXFCTW9CdExneEZOSW1YMDlZOEFxWUJtVWpyNGVsQ0xEOXROSU9NNVNRWU1zdWtpZ2YxMjRXTWZGRnd1ZmFyS2dTMGlONWJfS0VBaEHSAa4BQVVfeXFMUGFHMXk4eGFpWFBUYTBZUEQxTWNBb09mV2tMVmJMS3c3V3IzN1FZbEREcG5OcDc5TkR6blZacDE1VDBIQVZ0NThOYVpBcGJrZjNMM1FHRkVwb3JIcUFyZUZGa0hnSjV1ZGxkOEMzR1RndlBuRkx3QS1ITk9FblA1d295cDJ4VzhNeFhmSk1aZnBISkdWUkQwMkthamJ4amRLRGFjOXJSTW5FclhkbTB3?oc=5",
+            "source": "Google News"
+          },
+          {
+            "title": "Esta IA de edici\u00f3n de fotos me ha hecho abandonar Photoshop para siempre - El Confidencial",
+            "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxONTlUMzUxU1hheTNMZjZyeU83Yk1tSFN4UUlEX3FrWnl0MDQwX1BGd2tZSUMxaS10OXo4UXhQbk1aMVJ1ZmE3clB2ZkhCeXEyRmYxUTVJTjZ6RG9YZi04MWlZYUptd3cxUmFpVFpNZ0RqR1pnb1JuNDZTek5vSDlGcGM3bkV6WVZZMS1iMlhkQjczSGFzbEhtXzdka1d3cVJIZzhJVTJtRDNKVmh1Vy1YMGNRbTVEZk50VU8wN2V3?oc=5",
+            "source": "Google News"
+          },
+          {
+            "title": "\u2018Pathfinder\u2019, el software con IA que Hacienda utiliza para inspeccionar los m\u00f3viles y los ordenadores de los contribuyentes - Infobae",
+            "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNRXBJMUZiVUE5czFXcHlvWmpzTmdaSWhDeHpNZTBjY3NsVmI0SVNrX25MaG1IaFFmRDg0aDVvbjFzTl9hQjNVVkY5SUx6cHpYa09RNnFIMU40U2lrVXVFd2JfNFRIRkFEZlplQzlMdENPOEJJSGI5TGhPc2lycndYZUZKRkR2STNlZktFSkVweDM3STJfRUd4Q21vODNVbFQwLXlMUUdHeDRSZ25oQVo1RHpMNDhDRjFETjZFaXRsTlB1RnBkZTlxS0FiSzg5eGszYmNEUlp2anNyTm9XX09ydjJXcDdEOV83OEJlSENTcnJ0bTFUd2fSAZACQVVfeXFMUGtzT0tkbWdpbXBuTjY2UVdFc3U4UnRLekpDeFJlZ01YQzNjaEpwUF9JY3A1Q3NxRWpqMVNDaTBONFJOR2drUkNEX3RDaVcxN3A3ZGdZei1vU2l5aEZtOEdZTTRPVWRlakwzYXdVT0ZvR2JWMlhxMlZjSDkwY1ctSGpYMWd6QV9mb0Fra2JFcVllS2hHWUc1ZFV4TkRpc2tRSDFnMlViWmhnOTB2VWpzZ1FFTVJIcjFtNUNyMjJYOFV6MVE3ZEtFcUVIcmdiRTU4ZldkNHBYVEFtVXFZLXBqZ1RvTC1HMFRUUGpUQlhkZWhLNHBZZVFIYUQ2MzJKLVdWOHE4UnpYN0pwQ0V4Rk90NGM?oc=5",
+            "source": "Google News"
+          }
+        ]
+      },
+      "timestamp": "2026-04-05T11:53:31.452744"
+    }
+  },
+  "last_cleaned": "2026-04-05T11:53:22.665115"
+}

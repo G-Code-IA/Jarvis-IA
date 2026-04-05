@@ -22,6 +22,11 @@ from agent_core import agent_core, AgentCore
 from autonomous_agent import autonomous_agent_v2 as autonomous_agent, AutonomousAgentV2 as AutonomousAgent
 from conversational_engine import conversational_engine, ConversationalEngine
 from web_and_self_improve import web_search, self_improvement, WebSearchEngine, SelfImprovementEngine
+from real_jarvis_features import (
+    voice_activation, reminder_system, task_manager, 
+    document_reader, system_controller,
+    VoiceActivation, ReminderSystem, TaskManager, DocumentReader, SystemController
+)
 
 
 class CompleteAIAssistant:
@@ -129,6 +134,30 @@ class CompleteAIAssistant:
             return "mod_history"
         if any(x in msg_lower for x in ["agrega funcionalidad", "nueva feature"]):
             return "add_feature"
+        
+        # Real Jarvis features
+        if any(x in msg_lower for x in ["recordatorio", "reminder", "avísame", "avisame"]):
+            return "add_reminder"
+        if any(x in msg_lower for x in ["alarmas", "alarma", "despertador"]):
+            return "add_alarm"
+        if any(x in msg_lower for x in ["lista recordatorio", "ver recordatorio", "mis recordatorio"]):
+            return "list_reminders"
+        if any(x in msg_lower for x in ["lista alarma", "ver alarma", "mis alarma"]):
+            return "list_alarms"
+        if any(x in msg_lower for x in ["agrega tarea", "añade tarea", "crear tarea"]):
+            return "add_task"
+        if any(x in msg_lower for x in ["lista tarea", "ver tarea", "mis tarea", "pendientes"]):
+            return "list_tasks"
+        if any(x in msg_lower for x in ["completa tarea", "terminar tarea"]):
+            return "complete_task"
+        if any(x in msg_lower for x in ["lee archivo", "leer archivo", "ver archivo"]):
+            return "read_file"
+        if any(x in msg_lower for x in ["escucha", "hey jarvis", "activar voz"]):
+            return "voice_activation"
+        if any(x in msg_lower for x in ["red", "network", "ip", "wifi"]):
+            return "network_info"
+        if any(x in msg_lower for x in ["apps", "aplicaciones", "procesos"]):
+            return "running_apps"
         
         if msg_lower.endswith("?"):
             return "question"
@@ -244,6 +273,86 @@ class CompleteAIAssistant:
         
         if intent == "add_feature":
             return "✨ Para agregar una funcionalidad necesito:\n1. Nombre de la feature\n2. Código a agregar\n3. Archivo destino\n\n¿Qué quieres agregar?"
+        
+        # Real Jarvis features
+        if intent == "add_reminder":
+            import re
+            match = re.search(r'en\s+(\d+)\s*(minutos?|min)?', user_input, re.IGNORECASE)
+            mins = int(match.group(1)) if match else 30
+            msg_match = re.search(r'(?:recordatorio|reminder|avísame|avisame):\s*(.+)', user_input, re.IGNORECASE)
+            message = msg_match.group(1).strip() if msg_match else "Recordatorio"
+            result = reminder_system.add_reminder(message, mins)
+            return result.get("message", "Error al crear recordatorio")
+        
+        if intent == "add_alarm":
+            import re
+            match = re.search(r'(\d{1,2}):(\d{2})', user_input)
+            if match:
+                hour, minute = int(match.group(1)), int(match.group(2))
+                msg_match = re.search(r'alarma\s*(.+)?', user_input, re.IGNORECASE)
+                message = msg_match.group(1).strip() if msg_match else "Alarma"
+                result = reminder_system.add_alarm(hour, minute, message)
+                return result.get("message", "Error al crear alarma")
+            return "⏰ Formato: alarma HH:MM [mensaje]"
+        
+        if intent == "list_reminders":
+            return reminder_system.list_reminders()
+        
+        if intent == "list_alarms":
+            return reminder_system.list_alarms()
+        
+        if intent == "add_task":
+            import re
+            title_match = re.search(r'(?:tarea|task):\s*(.+?)(?:\s+con|\s+para|\s+priority|$)', user_input, re.IGNORECASE)
+            title = title_match.group(1).strip() if title_match else user_input[:50]
+            result = task_manager.add_task(title)
+            return result.get("message", "Error al crear tarea")
+        
+        if intent == "list_tasks":
+            return task_manager.list_tasks()
+        
+        if intent == "complete_task":
+            import re
+            match = re.search(r'(\d+)', user_input)
+            if match:
+                task_id = int(match.group(1))
+                result = task_manager.complete_task(task_id)
+                return result.get("message", "Error al completar tarea")
+            return "📋 Formato: completa tarea [número]"
+        
+        if intent == "read_file":
+            import re
+            match = re.search(r'(?:archivo|file)\s+["\']?(\w+\.?\w*)["\']?', user_input)
+            if match:
+                filepath = match.group(1)
+                result = document_reader.read_text_file(filepath)
+                if result.get("success"):
+                    return f"📄 **{filepath}** ({result['stats']['lines']} líneas, {result['stats']['words']} palabras):\n\n```\n{result['content'][:1000]}\n```"
+                return f"❌ Error: {result.get('error', 'No se pudo leer')}"
+            return "📄 ¿Qué archivo quieres leer?"
+        
+        if intent == "voice_activation":
+            result = voice_activation.start_listening()
+            return result.get("message", "Activación por voz")
+        
+        if intent == "network_info":
+            result = system_controller.get_network_info()
+            if result.get("success"):
+                info = result.get("info", {})
+                output = "🌐 **Info de Red:**\n\n"
+                if info.get("local_ip"):
+                    output += f"📡 IP Local: `{info['local_ip']}`\n"
+                if info.get("public_ip"):
+                    output += f"🌍 IP Pública: `{info['public_ip']}`\n"
+                return output
+            return "❌ No se pudo obtener info de red"
+        
+        if intent == "running_apps":
+            result = system_controller.get_running_apps()
+            if result.get("success"):
+                apps = result.get("apps", [])
+                return f"📱 **Apps corriendo ({len(apps)}):**\n\n" + "\n".join(f"• {app}" for app in apps[:15])
+            return "❌ No se pudo obtener apps"
         
         # Para comandos que requieren herramientas
         if intent in ["create_project", "diagnostic", "battery", "github_analysis"]:
