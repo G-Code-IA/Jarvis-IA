@@ -1,0 +1,165 @@
+name: 📱 Build Flutter APK
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'flutter_app/**'
+      - '.github/workflows/build-apk.yml'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  build-apk:
+    name: 🏗️ Build Android APK
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: 📱 Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: 'stable'
+          cache: true
+      
+      - name: 🔍 Flutter version
+        run: flutter --version
+      
+      - name: 📦 Get dependencies
+        working-directory: ./flutter_app
+        run: flutter pub get
+      
+      - name: 🔧 Analyze code
+        working-directory: ./flutter_app
+        run: flutter analyze || true
+      
+      - name: 🧪 Run tests
+        working-directory: ./flutter_app
+        run: flutter test || true
+      
+      - name: 🏗️ Build APK
+        working-directory: ./flutter_app
+        run: flutter build apk --release
+      
+      - name: 📊 APK info
+        run: |
+          echo "## 📱 APK Build Info" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### File Size" >> $GITHUB_STEP_SUMMARY
+          ls -lh flutter_app/build/app/outputs/flutter-apk/app-release.apk >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Build Date" >> $GITHUB_STEP_SUMMARY
+          echo "$(date)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Commit" >> $GITHUB_STEP_SUMMARY
+          echo "${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+      
+      - name: 📤 Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jarvis-app-release
+          path: flutter_app/build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 30
+      
+      - name: 📤 Upload debug APK (if exists)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jarvis-app-debug
+          path: flutter_app/build/app/outputs/flutter-apk/app-debug.apk
+          retention-days: 7
+          if-no-files-found: ignore
+
+  build-appbundle:
+    name: 📦 Build App Bundle (Play Store)
+    runs-on: ubuntu-latest
+    needs: build-apk
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+      
+      - name: 📱 Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: 'stable'
+          cache: true
+      
+      - name: 📦 Get dependencies
+        working-directory: ./flutter_app
+        run: flutter pub get
+      
+      - name: 🏗️ Build App Bundle
+        working-directory: ./flutter_app
+        run: flutter build appbundle --release
+      
+      - name: 📤 Upload App Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: jarvis-app-bundle
+          path: flutter_app/build/app/outputs/bundle/release/app-release.aab
+          retention-days: 30
+
+  release:
+    name: 🚀 Create Release
+    runs-on: ubuntu-latest
+    needs: build-apk
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: 📥 Download APK
+        uses: actions/download-artifact@v4
+        with:
+          name: jarvis-app-release
+          path: ./release
+      
+      - name: 📝 Get version
+        id: version
+        run: |
+          VERSION=$(date +'%Y.%m.%d.%H%M')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+      
+      - name: 🚀 Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: J.A.R.V.I.S. v${{ steps.version.outputs.version }}
+          body: |
+            ## 🤖 J.A.R.V.I.S. AI Assistant
+            
+            ### 📱 APK Build
+            - **Version:** ${{ steps.version.outputs.version }}
+            - **Date:** $(date)
+            - **Commit:** ${{ github.sha }}
+            
+            ### 📥 Download
+            - [app-release.apk](https://github.com/${{ github.repository }}/releases/download/v${{ steps.version.outputs.version }}/app-release.apk)
+            
+            ### 📋 Installation
+            1. Download the APK
+            2. Enable "Install from unknown sources"
+            3. Install and open
+            4. Configure API URL in settings
+            
+            ### 🧠 Features
+            - Multi-model AI support
+            - Web search
+            - Project generation
+            - System diagnostics
+            - Task management
+            - And much more!
+          files: ./release/app-release.apk
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
