@@ -1,0 +1,25 @@
+[
+  {
+    "timestamp": "2026-04-04T23:41:42.193121",
+    "input": "Hola!",
+    "intent": "greeting",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente",
+      "Subestim\u00e9 mi capacidad - deber\u00eda tener m\u00e1s confianza"
+    ],
+    "confidence": 0.3
+  },
+  {
+    "timestamp": "2026-04-04T23:42:45.906315",
+    "input": "Hola!",
+    "intent": "greeting",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.8
+  }
+]

@@ -43,6 +43,7 @@ from ai_developer import AIDeveloper, CodeAnalyzer, CodeOptimizer
 from reasoning_engine import reasoning_engine, ReasoningEngine
 from conversational_engine import conversational_engine, ConversationalEngine
 from ironman_module import ironman_module, IronManModule
+from agent_core import agent_core, AgentCore
 
 # ==================== CONFIGURACIÓN ====================
 
@@ -200,17 +201,17 @@ class JARVISBrain:
     
     def process_command(self, command: str, interface: str = "api", 
                        user_id: Optional[int] = None, context: List = None) -> Dict:
-        """Procesar comando con conversación natural tipo Siri/Gemini."""
+        """Procesar comando con agente de IA autónomo."""
         start_time = time.time()
         
-        # 🧠 Usar motor conversacional para conversación natural
-        chat_result = conversational_engine.chat(command, context)
+        # 🧠 Usar Agent Core para procesamiento autónomo
+        agent_result = agent_core.process(command, context)
         
-        response = chat_result["response"]
+        response = agent_result["response"]
         execution_time = time.time() - start_time
         
-        # Si la acción fue exitosa, guardar en memoria
-        if chat_result.get("action_taken"):
+        # Guardar en memoria compartida
+        if agent_result.get("agent_state", {}).get("tool_used"):
             self.memory.add_short_term(command, f"command_{interface}")
             self.memory.add_conversation(user_id or 0, command, response)
             self.learning.log_command(command, True, execution_time, "positive")
@@ -230,10 +231,10 @@ class JARVISBrain:
             "execution_time": execution_time,
             "interface": interface,
             "timestamp": datetime.now().isoformat(),
+            "agent": agent_result.get("agent_state", {}),
             "conversation": {
-                "is_follow_up": chat_result.get("follow_up") is not None,
-                "action_taken": chat_result.get("action_taken", False),
-                "history": chat_result.get("history", [])
+                "is_follow_up": agent_result.get("agent_state", {}).get("understanding", {}).get("is_follow_up", False),
+                "history": agent_result.get("memory_summary", {}).get("recent_thoughts", [])
             },
             "context": {"messages": self.memory.get_conversation_history(user_id or 0, 10)}
         }
