@@ -106,6 +106,12 @@ def print_help():
   historial          Ver historial de comandos
   version            Ver versión de J.A.R.V.I.S.
 
+{Colors.CYAN}🧠 Autónomo:{Colors.RESET}
+  autónomo on        Iniciar modo autónomo
+  autónomo off       Detener modo autónomo
+  autónomo status    Ver estado autónomo
+  autónomo <seg>     Iniciar con intervalo personalizado
+
 {Colors.DIM}💡 Tip: Puedes usar pipes y redirección como en cualquier comando{Colors.RESET}
 """
     print(help_text)
@@ -197,6 +203,75 @@ def interactive_mode():
                 print(f"\n{Colors.BOLD}J.A.R.V.I.S. Terminal v3.0{Colors.RESET}")
                 print(f"{Colors.DIM}Just A Rather Very Intelligent System{Colors.RESET}")
                 print(f"{Colors.DIM}Terminal Interface - CLI Mode{Colors.RESET}\n")
+                continue
+            
+            # Comandos de modo autónomo
+            elif cmd_lower.startswith("autónomo") or cmd_lower.startswith("autonomo"):
+                parts = cmd_lower.split()
+                
+                if len(parts) >= 2:
+                    subcmd = parts[1]
+                    
+                    if subcmd in ["on", "start", "activar", "iniciar"]:
+                        interval = 60
+                        if len(parts) >= 3:
+                            try:
+                                interval = int(parts[2])
+                            except:
+                                pass
+                        
+                        try:
+                            response = requests.post(
+                                f"{BRAIN_URL}/brain/autonomous/start",
+                                params={"interval": interval},
+                                timeout=10
+                            )
+                            if response.status_code == 200:
+                                print(f"\n{Colors.GREEN}✅ Modo autónomo iniciado (intervalo: {interval}s){Colors.RESET}")
+                                print(f"{Colors.DIM}   J.A.R.V.I.S. pensará y actuará por sí mismo{Colors.RESET}\n")
+                            else:
+                                print(f"{Colors.RED}❌ Error al iniciar modo autónomo{Colors.RESET}\n")
+                        except Exception as e:
+                            print(f"{Colors.RED}❌ Error: {str(e)}{Colors.RESET}\n")
+                    
+                    elif subcmd in ["off", "stop", "desactivar", "detener"]:
+                        try:
+                            response = requests.post(
+                                f"{BRAIN_URL}/brain/autonomous/stop",
+                                timeout=10
+                            )
+                            if response.status_code == 200:
+                                print(f"\n{Colors.YELLOW}🛑 Modo autónomo detenido{Colors.RESET}\n")
+                            else:
+                                print(f"{Colors.RED}❌ Error al detener modo autónomo{Colors.RESET}\n")
+                        except Exception as e:
+                            print(f"{Colors.RED}❌ Error: {str(e)}{Colors.RESET}\n")
+                    
+                    elif subcmd in ["status", "estado", "info"]:
+                        try:
+                            response = requests.get(
+                                f"{BRAIN_URL}/brain/autonomous/status",
+                                timeout=10
+                            )
+                            if response.status_code == 200:
+                                data = response.json()
+                                print(f"\n{Colors.BOLD}🧠 Estado del Modo Autónomo:{Colors.RESET}\n")
+                                print(f"  Running: {data.get('is_running', False)}")
+                                print(f"  Mood: {data.get('mood', 'unknown')}")
+                                print(f"  Thoughts: {data.get('thought_count', 0)}")
+                                print(f"  Actions: {data.get('action_count', 0)}")
+                                print(f"  Last action: {data.get('last_autonomous_action', 'never')}")
+                                print()
+                            else:
+                                print(f"{Colors.RED}❌ Error al obtener estado{Colors.RESET}\n")
+                        except Exception as e:
+                            print(f"{Colors.RED}❌ Error: {str(e)}{Colors.RESET}\n")
+                    
+                    else:
+                        print(f"{Colors.YELLOW}Uso: autónomo [on|off|status] [intervalo]{Colors.RESET}\n")
+                else:
+                    print(f"{Colors.YELLOW}Uso: autónomo [on|off|status] [intervalo]{Colors.RESET}\n")
+                
                 continue
             
             elif cmd_lower == "historial":

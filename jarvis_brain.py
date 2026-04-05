@@ -44,6 +44,7 @@ from reasoning_engine import reasoning_engine, ReasoningEngine
 from conversational_engine import conversational_engine, ConversationalEngine
 from ironman_module import ironman_module, IronManModule
 from agent_core import agent_core, AgentCore
+from autonomous_agent import autonomous_agent, AutonomousAgent
 
 # ==================== CONFIGURACIÓN ====================
 
@@ -495,6 +496,23 @@ async def get_reasoning_stats():
         "reasoning": reasoning_engine.get_thought_summary(),
         "recent_thoughts": reasoning_engine.thought_history[-5:]
     }
+
+@app.post("/brain/autonomous/start")
+async def start_autonomous_mode(interval: int = 60):
+    """Iniciar modo autónomo"""
+    autonomous_agent.start_autonomous_mode(interval)
+    return {"success": True, "message": f"Modo autónomo iniciado (intervalo: {interval}s)"}
+
+@app.post("/brain/autonomous/stop")
+async def stop_autonomous_mode():
+    """Detener modo autónomo"""
+    autonomous_agent.stop_autonomous_mode()
+    return {"success": True, "message": "Modo autónomo detenido"}
+
+@app.get("/brain/autonomous/status")
+async def get_autonomous_status():
+    """Estado del modo autónomo"""
+    return autonomous_agent.get_autonomous_status()
 
 # ==================== STATIC FILES ====================
 
