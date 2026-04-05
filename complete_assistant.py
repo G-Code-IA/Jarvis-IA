@@ -21,6 +21,7 @@ from model_manager import model_manager, ModelManager
 from agent_core import agent_core, AgentCore
 from autonomous_agent import autonomous_agent_v2 as autonomous_agent, AutonomousAgentV2 as AutonomousAgent
 from conversational_engine import conversational_engine, ConversationalEngine
+from web_and_self_improve import web_search, self_improvement, WebSearchEngine, SelfImprovementEngine
 
 
 class CompleteAIAssistant:
@@ -112,6 +113,23 @@ class CompleteAIAssistant:
             return "install_model"
         if any(x in msg_lower for x in ["cambia modelo"]):
             return "change_model"
+        
+        # Web search
+        if any(x in msg_lower for x in ["busca", "buscar", "search", "investiga", "noticias de"]):
+            return "web_search"
+        if any(x in msg_lower for x in ["obtén", "obtener", "fetch", "descarga página"]):
+            return "fetch_url"
+        
+        # Self-improvement
+        if any(x in msg_lower for x in ["actualiza", "update", "actualizar"]):
+            return "self_update"
+        if any(x in msg_lower for x in ["modifica", "modify", "cambia código"]):
+            return "self_modify"
+        if any(x in msg_lower for x in ["historial de cambios", "modificaciones", "version"]):
+            return "mod_history"
+        if any(x in msg_lower for x in ["agrega funcionalidad", "nueva feature"]):
+            return "add_feature"
+        
         if msg_lower.endswith("?"):
             return "question"
         return "conversation"
@@ -191,6 +209,41 @@ class CompleteAIAssistant:
                 result = self.model_manager.set_default_model(model_name)
                 return result.get("message", "Procesando...")
             return "¿A qué modelo quieres cambiar?"
+        
+        # Web search
+        if intent == "web_search":
+            import re
+            query = re.sub(r'(busca|buscar|search|investiga|noticias de)', '', user_input, flags=re.IGNORECASE).strip()
+            if not query:
+                return "¿Qué quieres que busque?"
+            
+            results = web_search.search(query)
+            return web_search.format_search_results(results)
+        
+        if intent == "fetch_url":
+            import re
+            match = re.search(r'(https?://\S+)', user_input)
+            if match:
+                url = match.group(1)
+                result = web_search.fetch_url(url)
+                if result.get("success"):
+                    return f"🌐 **{result.get('title', 'Sin título')}**\n\n{result.get('content', '')[:1000]}"
+                return f"❌ Error: {result.get('error', 'No se pudo obtener')}"
+            return "No encontré URL en tu mensaje"
+        
+        # Self-improvement
+        if intent == "self_update":
+            result = self_improvement.self_update()
+            return result.get("message", "Actualizando...")
+        
+        if intent == "mod_history":
+            return self_improvement.get_modification_history()
+        
+        if intent == "self_modify":
+            return "🤔 Para modificar código necesito saber:\n1. Qué archivo cambiar\n2. Qué contenido poner\n3. Por qué hacerlo\n\n¿Qué quieres modificar?"
+        
+        if intent == "add_feature":
+            return "✨ Para agregar una funcionalidad necesito:\n1. Nombre de la feature\n2. Código a agregar\n3. Archivo destino\n\n¿Qué quieres agregar?"
         
         # Para comandos que requieren herramientas
         if intent in ["create_project", "diagnostic", "battery", "github_analysis"]:
