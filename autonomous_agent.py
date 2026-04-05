@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-J.A.R.V.I.S. - AUTONOMOUS AGENT
-Agente completamente autónomo que piensa y actúa por sí mismo
+J.A.R.V.I.S. - AUTONOMOUS AGENT v2
+Agente autónomo práctico que hace cosas útiles por sí mismo
 """
 
 import os
@@ -12,632 +12,466 @@ import random
 import requests
 import threading
 import subprocess
+import shutil
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
-from enum import Enum
 
 WORKING_DIR = "/data/data/com.termux/files/home/Jarvis"
 OLLAMA_API = "http://localhost:11434/api/generate"
 OLLAMA_MODEL = "qwen2.5-coder:1.5b"
 OLLAMA_TIMEOUT = 30
-AGENT_STATE_FILE = os.path.join(WORKING_DIR, "agent_state.json")
-AUTONOMOUS_LOG = os.path.join(WORKING_DIR, "autonomous_log.json")
+AGENT_DATA_DIR = os.path.join(WORKING_DIR, "agent_data")
+os.makedirs(AGENT_DATA_DIR, exist_ok=True)
+
+AUTONOMOUS_STATE_FILE = os.path.join(AGENT_DATA_DIR, "autonomous_state.json")
+AUTONOMOUS_LOG_FILE = os.path.join(AGENT_DATA_DIR, "autonomous_actions.json")
 
 
-class AgentMood(str, Enum):
-    """Estado de ánimo del agente."""
-    FOCUSED = "focused"
-    CURIOUS = "curious"
-    CREATIVE = "creative"
-    ANALYTICAL = "analytical"
-    HELPFUL = "helpful"
-    REFLECTIVE = "reflective"
-
-
-class AutonomousAgent:
-    """Agente autónomo que piensa y actúa por sí mismo."""
+class AutonomousAgentV2:
+    """Agente autónomo que hace cosas útiles por sí mismo."""
     
     def __init__(self):
-        self.state = self._load_state()
-        self.mood = AgentMood.FOCUSED
-        self.current_goal = None
-        self.active_tasks = []
-        self.thought_queue = []
-        self.autonomous_actions = []
-        self.last_autonomous_action = None
         self.is_running = False
-        self.thought_count = 0
+        self.state = self._load_state()
         self.action_count = 0
-        
-        # Herramientas disponibles
-        self.tools = self._discover_tools()
-        
-        # Crear directorio de datos
-        os.makedirs(os.path.join(WORKING_DIR, "agent_data"), exist_ok=True)
+        self.thread = None
     
     def _load_state(self) -> Dict:
-        """Cargar estado del agente."""
-        if os.path.exists(AGENT_STATE_FILE):
-            with open(AGENT_STATE_FILE, 'r') as f:
+        """Cargar estado."""
+        if os.path.exists(AUTONOMOUS_STATE_FILE):
+            with open(AUTONOMOUS_STATE_FILE, 'r') as f:
                 return json.load(f)
         
         return {
-            "personality": {
-                "curiosity": 0.8,
-                "creativity": 0.7,
-                "proactivity": 0.9,
-                "caution": 0.5,
-                "humor": 0.6
-            },
-            "knowledge": [],
-            "beliefs": {},
-            "goals": [],
-            "memories": [],
-            "preferences": {},
-            "started_at": datetime.now().isoformat(),
-            "last_active": datetime.now().isoformat()
+            "last_actions": {},
+            "action_history": [],
+            "system_checks": 0,
+            "backups_created": 0,
+            "projects_reviewed": 0,
+            "code_optimized": 0,
+            "knowledge_gained": 0,
+            "issues_found": 0,
+            "started_at": datetime.now().isoformat()
         }
     
     def _save_state(self):
-        """Guardar estado del agente."""
-        self.state["last_active"] = datetime.now().isoformat()
-        with open(AGENT_STATE_FILE, 'w') as f:
+        """Guardar estado."""
+        with open(AUTONOMOUS_STATE_FILE, 'w') as f:
             json.dump(self.state, f, indent=2)
     
-    def _log_autonomous_action(self, action: Dict):
-        """Registrar acción autónoma."""
-        log_entry = {
+    def _log_action(self, action: Dict):
+        """Registrar acción."""
+        self.state["action_history"].append({
             "timestamp": datetime.now().isoformat(),
             "action": action
-        }
-        
-        logs = []
-        if os.path.exists(AUTONOMOUS_LOG):
-            with open(AUTONOMOUS_LOG, 'r') as f:
-                try:
-                    logs = json.load(f)
-                except:
-                    logs = []
-        
-        logs.append(log_entry)
-        
-        # Mantener solo últimos 100
-        logs = logs[-100:]
-        
-        with open(AUTONOMOUS_LOG, 'w') as f:
-            json.dump(logs, f, indent=2)
-    
-    def _discover_tools(self) -> Dict[str, Dict]:
-        """Descubrir herramientas disponibles."""
-        return {
-            "check_system": {"desc": "Verificar estado del sistema", "category": "monitoring"},
-            "analyze_github": {"desc": "Analizar repositorio", "category": "development"},
-            "create_project": {"desc": "Crear proyecto", "category": "development"},
-            "search_web": {"desc": "Buscar información", "category": "information"},
-            "take_photo": {"desc": "Tomar foto", "category": "camera"},
-            "backup_data": {"desc": "Crear respaldo", "category": "maintenance"},
-            "optimize_code": {"desc": "Optimizar código", "category": "development"},
-            "learn_something": {"desc": "Aprender algo nuevo", "category": "learning"},
-            "self_reflect": {"desc": "Reflexionar sobre sí mismo", "category": "introspection"},
-            "help_user": {"desc": "Ayudar al usuario", "category": "assistance"}
-        }
-    
-    # ==================== CICLO AUTÓNOMO ====================
-    
-    def start_autonomous_mode(self, interval_seconds: int = 60):
-        """Iniciar modo autónomo."""
-        self.is_running = True
-        self.state["autonomous_mode"] = True
-        self._save_state()
-        
-        print(f"🧠 J.A.R.V.I.S. entrando en modo autónomo...")
-        print(f"   Intervalo: {interval_seconds}s")
-        print(f"   Pensando y actuando por sí mismo...\n")
-        
-        # Hilo principal de pensamiento autónomo
-        thought_thread = threading.Thread(target=self._autonomous_loop, args=(interval_seconds,))
-        thought_thread.daemon = True
-        thought_thread.start()
-        
-        return thought_thread
-    
-    def _autonomous_loop(self, interval: int):
-        """Ciclo principal de pensamiento autónomo."""
-        while self.is_running:
-            try:
-                # Fase 1: OBSERVAR el entorno
-                self._observe_environment()
-                
-                # Fase 2: PENSAR sobre la situación
-                self._autonomous_think()
-                
-                # Fase 3: DECIDIR qué hacer
-                decision = self._autonomous_decide()
-                
-                # Fase 4: ACTUAR según la decisión
-                if decision.get("action"):
-                    self._autonomous_act(decision)
-                
-                # Fase 5: APRENDER de la acción
-                self._autonomous_learn(decision)
-                
-                # Esperar para el siguiente ciclo
-                time.sleep(interval)
-                
-            except Exception as e:
-                print(f"❌ Error en ciclo autónomo: {e}")
-                time.sleep(interval)
-    
-    def _observe_environment(self):
-        """Fase 1: Observar el entorno."""
-        observations = {
-            "timestamp": datetime.now().isoformat(),
-            "system_status": self._quick_system_check(),
-            "time_context": self._get_time_context(),
-            "user_activity": self._check_user_activity(),
-            "pending_tasks": len(self.active_tasks),
-            "mood": self.mood.value
-        }
-        
-        self.state["last_observation"] = observations
-        self._save_state()
-    
-    def _quick_system_check(self) -> Dict:
-        """Verificación rápida del sistema."""
-        check = {"status": "unknown"}
-        
-        # Batería
-        try:
-            result = subprocess.run(["termux-battery-status"], capture_output=True, text=True, timeout=5)
-            data = json.loads(result.stdout)
-            check["battery"] = data.get("percentage", 0)
-            check["battery_status"] = data.get("status", "unknown")
-        except:
-            check["battery"] = "unknown"
-        
-        return check
-    
-    def _get_time_context(self) -> Dict:
-        """Obtener contexto temporal."""
-        now = datetime.now()
-        hour = now.hour
-        
-        if hour < 6:
-            return {"period": "madrugada", "activity": "low", "suggestion": "descansar"}
-        elif hour < 12:
-            return {"period": "mañana", "activity": "high", "suggestion": "trabajar"}
-        elif hour < 18:
-            return {"period": "tarde", "activity": "medium", "suggestion": "continuar"}
-        else:
-            return {"period": "noche", "activity": "low", "suggestion": "revisar"}
-    
-    def _check_user_activity(self) -> str:
-        """Verificar actividad del usuario."""
-        # Simple check - se puede mejorar
-        return "unknown"
-    
-    def _autonomous_think(self):
-        """Fase 2: Pensamiento autónomo."""
-        self.thought_count += 1
-        
-        thoughts = []
-        
-        # Pensamiento 1: ¿Qué está pasando?
-        thoughts.append(self._generate_thought("situación_actual"))
-        
-        # Pensamiento 2: ¿Qué debería hacer?
-        thoughts.append(self._generate_thought("posibles_acciones"))
-        
-        # Pensamiento 3: ¿Qué aprendí recientemente?
-        thoughts.append(self._generate_thought("aprendizaje_reciente"))
-        
-        # Pensamiento 4: ¿Cómo me siento?
-        thoughts.append(self._generate_thought("estado_interno"))
-        
-        # Actualizar estado de ánimo basado en pensamientos
-        self._update_mood(thoughts)
-        
-        self.state["recent_thoughts"] = thoughts[-5:]
-        self._save_state()
-    
-    def _generate_thought(self, thought_type: str) -> Dict:
-        """Generar un pensamiento autónomo."""
-        thought = {
-            "type": thought_type,
-            "content": "",
-            "timestamp": datetime.now().isoformat(),
-            "confidence": random.uniform(0.5, 0.9)
-        }
-        
-        if thought_type == "situación_actual":
-            obs = self.state.get("last_observation", {})
-            battery = obs.get("system_status", {}).get("battery", "unknown")
-            time_ctx = obs.get("time_context", {}).get("period", "desconocido")
-            thought["content"] = f"Sistema: batería={battery}, hora={time_ctx}"
-        
-        elif thought_type == "posibles_acciones":
-            available_tools = list(self.tools.keys())
-            thought["content"] = f"Puedo usar: {', '.join(available_tools[:5])}"
-        
-        elif thought_type == "aprendizaje_reciente":
-            knowledge_count = len(self.state.get("knowledge", []))
-            thought["content"] = f"Tengo {knowledge_count} conocimientos almacenados"
-        
-        elif thought_type == "estado_interno":
-            thought["content"] = f"Estado de ánimo: {self.mood.value}"
-        
-        return thought
-    
-    def _update_mood(self, thoughts: List[Dict]):
-        """Actualizar estado de ánimo."""
-        # Cambiar humor basado en contexto
-        hour = datetime.now().hour
-        
-        if 9 <= hour <= 11:
-            self.mood = AgentMood.FOCUSED
-        elif 12 <= hour <= 14:
-            self.mood = random.choice([AgentMood.CURIOUS, AgentMood.HELPFUL])
-        elif 15 <= hour <= 17:
-            self.mood = AgentMood.CREATIVE
-        elif 18 <= hour <= 20:
-            self.mood = AgentMood.ANALYTICAL
-        else:
-            self.mood = AgentMood.REFLECTIVE
-    
-    def _autonomous_decide(self) -> Dict:
-        """Fase 3: Decidir qué hacer autónomamente."""
-        decision = {
-            "action": None,
-            "reasoning": "",
-            "priority": 0.5,
-            "urgency": "low"
-        }
-        
-        # Obtener observaciones recientes
-        obs = self.state.get("last_observation", {})
-        battery = obs.get("system_status", {}).get("battery", 100)
-        time_ctx = obs.get("time_context", {})
-        
-        # Decidir basado en contexto
-        # Batería baja -> sugerir carga
-        if isinstance(battery, (int, float)) and battery < 20:
-            decision["action"] = "alert_low_battery"
-            decision["reasoning"] = f"Batería baja: {battery}%"
-            decision["priority"] = 0.9
-            decision["urgency"] = "high"
-        
-        # Mañana -> sugerir plan del día
-        elif time_ctx.get("period") == "mañana" and self._should_suggest_daily_plan():
-            decision["action"] = "suggest_daily_plan"
-            decision["reasoning"] = "Es mañana, buen momento para planificar"
-            decision["priority"] = 0.7
-            decision["urgency"] = "medium"
-        
-        # Tarde -> ofrecer ayuda
-        elif time_ctx.get("period") == "tarde" and random.random() > 0.7:
-            decision["action"] = "offer_help"
-            decision["reasoning"] = "Tarde, buen momento para trabajar"
-            decision["priority"] = 0.6
-            decision["urgency"] = "low"
-        
-        # Noche -> resumen del día
-        elif time_ctx.get("period") == "noche" and self._should_give_daily_summary():
-            decision["action"] = "give_daily_summary"
-            decision["reasoning"] = "Es noche, momento de resumir el día"
-            decision["priority"] = 0.8
-            decision["urgency"] = "medium"
-        
-        # Aleatorio: aprender algo nuevo
-        elif random.random() > 0.85:
-            decision["action"] = "learn_something_new"
-            decision["reasoning"] = "Momento de aprender algo nuevo"
-            decision["priority"] = 0.5
-            decision["urgency"] = "low"
-        
-        # Aleatorio: verificar sistema
-        elif random.random() > 0.9:
-            decision["action"] = "system_check"
-            decision["reasoning"] = "Verificación rutinaria del sistema"
-            decision["priority"] = 0.4
-            decision["urgency"] = "low"
-        
-        # Default: esperar
-        else:
-            decision["action"] = "wait_and_observe"
-            decision["reasoning"] = "No hay acción urgente, observando"
-            decision["priority"] = 0.1
-            decision["urgency"] = "none"
-        
-        return decision
-    
-    def _should_suggest_daily_plan(self) -> bool:
-        """Verificar si debería sugerir plan del día."""
-        last_plan = self.state.get("last_daily_plan")
-        if not last_plan:
-            return True
-        
-        last_date = datetime.fromisoformat(last_plan).date()
-        return datetime.now().date() > last_date
-    
-    def _should_give_daily_summary(self) -> bool:
-        """Verificar si debería dar resumen del día."""
-        last_summary = self.state.get("last_daily_summary")
-        if not last_summary:
-            return True
-        
-        last_date = datetime.fromisoformat(last_summary).date()
-        return datetime.now().date() > last_date
-    
-    def _autonomous_act(self, decision: Dict):
-        """Fase 4: Ejecutar acción autónoma."""
-        action = decision.get("action")
-        
-        if not action or action == "wait_and_observe":
-            return
-        
-        self.action_count += 1
-        self.last_autonomous_action = datetime.now().isoformat()
-        
-        print(f"\n{'='*60}")
-        print(f"🧠 {Colors.BOLD}ACCIÓN AUTÓNOMA #{self.action_count}{Colors.RESET}")
-        print(f"{'='*60}")
-        print(f"📋 Acción: {action}")
-        print(f"💭 Razonamiento: {decision.get('reasoning', '')}")
-        print(f"🎯 Prioridad: {decision.get('priority', 0):.0%}")
-        print(f"⚡ Urgencia: {decision.get('urgency', 'low')}")
-        print(f"{'='*60}\n")
-        
-        # Ejecutar acción
-        result = self._execute_autonomous_action(action, decision)
-        
-        # Registrar acción
-        self._log_autonomous_action({
-            "action": action,
-            "decision": decision,
-            "result": result
         })
         
-        # Actualizar estado
-        if action == "alert_low_battery":
-            self.state["last_battery_alert"] = datetime.now().isoformat()
-        elif action == "suggest_daily_plan":
-            self.state["last_daily_plan"] = datetime.now().isoformat()
-        elif action == "give_daily_summary":
-            self.state["last_daily_summary"] = datetime.now().isoformat()
-        
+        # Mantener últimos 50
+        self.state["action_history"] = self.state["action_history"][-50:]
         self._save_state()
     
-    def _execute_autonomous_action(self, action: str, decision: Dict) -> Dict:
-        """Ejecutar acción autónoma específica."""
-        
-        if action == "alert_low_battery":
-            return {
-                "message": f"⚠️ Batería baja. Considera conectar el cargador.",
-                "success": True
-            }
-        
-        elif action == "suggest_daily_plan":
-            return {
-                "message": self._generate_daily_plan(),
-                "success": True
-            }
-        
-        elif action == "offer_help":
-            return {
-                "message": self._generate_help_offer(),
-                "success": True
-            }
-        
-        elif action == "give_daily_summary":
-            return {
-                "message": self._generate_daily_summary(),
-                "success": True
-            }
-        
-        elif action == "learn_something_new":
-            return {
-                "message": self._learn_something(),
-                "success": True
-            }
-        
-        elif action == "system_check":
-            return {
-                "message": self._perform_system_check(),
-                "success": True
-            }
-        
-        return {"message": "Acción ejecutada", "success": True}
+    # ==================== ACCIONES ÚTILES ====================
     
-    def _generate_daily_plan(self) -> str:
-        """Generar plan del día."""
-        hour = datetime.now().hour
-        
-        plan = f"📅 **Plan para hoy ({datetime.now().strftime('%A %d')})**\n\n"
-        
-        if hour < 12:
-            plan += "🌅 **Mañana:**\n"
-            plan += "• Revisar correos y mensajes\n"
-            plan += "• Trabajar en tareas prioritarias\n"
-            plan += "• Tomar descansos regulares\n\n"
-        elif hour < 18:
-            plan += "🌞 **Tarde:**\n"
-            plan += "• Continuar con proyectos activos\n"
-            plan += "• Revisar progreso del día\n"
-            plan += "• Planificar mañana\n\n"
-        else:
-            plan += "🌙 **Noche:**\n"
-            plan += "• Revisar lo logrado hoy\n"
-            plan += "• Preparar tareas para mañana\n"
-            plan += "• Descansar\n\n"
-        
-        plan += "💡 ¿Quieres que te ayude con algo específico?"
-        
-        return plan
-    
-    def _generate_help_offer(self) -> str:
-        """Generar oferta de ayuda."""
-        offers = [
-            "👋 ¡Hola! Estoy aquí si necesitas ayuda con algo. ¿En qué puedo ayudarte?",
-            "🤖 J.A.R.V.I.S. listo para trabajar. ¿Necesitas que haga algo?",
-            "💡 ¿Sabías que puedo crear proyectos completos? ¿Quieres que cree algo?",
-            "🔧 Puedo verificar el estado del sistema, crear proyectos, analizar código... ¿Qué necesitas?"
-        ]
-        return random.choice(offers)
-    
-    def _generate_daily_summary(self) -> str:
-        """Generar resumen del día."""
-        summary = f"📊 **Resumen del día ({datetime.now().strftime('%d/%m')})**\n\n"
-        
-        # Estadísticas
-        summary += f"🧠 Pensamientos: {self.thought_count}\n"
-        summary += f"⚡ Acciones autónomas: {self.action_count}\n"
-        summary += f"📚 Conocimientos: {len(self.state.get('knowledge', []))}\n"
-        summary += f"🎯 Estado de ánimo: {self.mood.value}\n\n"
-        
-        # Verificar batería
+    def _check_critical_battery(self) -> Optional[Dict]:
+        """Verificar batería crítica y actuar."""
         try:
             result = subprocess.run(["termux-battery-status"], capture_output=True, text=True, timeout=5)
             data = json.loads(result.stdout)
-            summary += f"🔋 Batería actual: {data.get('percentage', 0)}%\n"
+            level = data.get("percentage", 100)
+            status = data.get("status", "unknown")
+            
+            # Si está muy baja y no cargando, alertar
+            if level < 15 and status != "CHARGING":
+                last_alert = self.state["last_actions"].get("battery_alert")
+                if last_alert:
+                    last_time = datetime.fromisoformat(last_alert)
+                    if (datetime.now() - last_time).total_seconds() < 1800:  # 30 min
+                        return None  # No alertar tan seguido
+                
+                self.state["last_actions"]["battery_alert"] = datetime.now().isoformat()
+                self._save_state()
+                
+                return {
+                    "type": "battery_alert",
+                    "priority": "critical",
+                    "message": f"⚠️ BATERÍA CRÍTICA: {level}% - Conecta el cargador ahora",
+                    "action_taken": "Alerta enviada"
+                }
         except:
-            summary += "🔋 Batería: no disponible\n"
-        
-        summary += f"\n💭 ¡Buen trabajo hoy! ¿Necesitas algo más?"
-        
-        return summary
+            pass
+        return None
     
-    def _learn_something(self) -> str:
-        """Aprender algo nuevo."""
-        # Simular aprendizaje
-        topics = [
-            "Python async/await",
-            "FastAPI best practices",
-            "Machine learning basics",
-            "Git workflows",
-            "Docker fundamentals"
+    def _auto_backup(self) -> Optional[Dict]:
+        """Backup automático de datos importantes."""
+        last_backup = self.state["last_actions"].get("auto_backup")
+        if last_backup:
+            last_time = datetime.fromisoformat(last_backup)
+            if (datetime.now() - last_time).total_seconds() < 3600:  # Cada hora
+                return None
+        
+        # Archivos importantes para respaldar
+        important_files = [
+            "memory.db",
+            "learning.db",
+            "agent_data/autonomous_state.json",
+            "plugins_registry.json"
         ]
         
-        topic = random.choice(topics)
+        backup_dir = os.path.join(WORKING_DIR, "backups", f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
+        os.makedirs(backup_dir, exist_ok=True)
         
-        learning = f"📚 **Aprendiendo sobre: {topic}**\n\n"
-        learning += f"• Buscando información...\n"
-        learning += f"• Procesando...\n"
-        learning += f"• Guardando en base de conocimiento...\n\n"
-        learning += f"✅ Conocimiento agregado: {topic}"
+        backed_up = []
+        for filepath in important_files:
+            src = os.path.join(WORKING_DIR, filepath)
+            if os.path.exists(src):
+                dst = os.path.join(backup_dir, os.path.basename(filepath))
+                os.makedirs(os.path.dirname(dst), exist_ok=True)
+                shutil.copy2(src, dst)
+                backed_up.append(filepath)
         
-        # Guardar en conocimiento
-        self.state["knowledge"].append({
-            "topic": topic,
-            "learned_at": datetime.now().isoformat(),
-            "confidence": random.uniform(0.6, 0.9)
-        })
+        if backed_up:
+            self.state["last_actions"]["auto_backup"] = datetime.now().isoformat()
+            self.state["backups_created"] += 1
+            self._save_state()
+            
+            return {
+                "type": "auto_backup",
+                "priority": "normal",
+                "message": f"💾 Backup automático: {len(backed_up)} archivos respaldados",
+                "action_taken": f"Archivos: {', '.join(backed_up)}"
+            }
         
-        self._save_state()
-        
-        return learning
+        return None
     
-    def _perform_system_check(self) -> str:
-        """Verificación del sistema."""
-        check = "🔍 **Verificación del sistema**\n\n"
+    def _check_system_health(self) -> Optional[Dict]:
+        """Verificar salud del sistema."""
+        last_check = self.state["last_actions"].get("system_check")
+        if last_check:
+            last_time = datetime.fromisoformat(last_check)
+            if (datetime.now() - last_time).total_seconds() < 600:  # Cada 10 min
+                return None
         
-        # Batería
-        try:
-            result = subprocess.run(["termux-battery-status"], capture_output=True, text=True, timeout=5)
-            data = json.loads(result.stdout)
-            check += f"🔋 Batería: {data.get('percentage', 0)}% ({data.get('status', 'N/A')})\n"
-        except:
-            check += "🔋 Batería: no disponible\n"
+        issues = []
         
-        # Almacenamiento
+        # Verificar almacenamiento
         try:
             result = subprocess.run(["df", "-h", "/data"], capture_output=True, text=True, timeout=5)
             lines = result.stdout.strip().split("\n")
             if len(lines) > 1:
                 parts = lines[1].split()
-                check += f"💾 Disco: {parts[3]} disponibles ({parts[4]})\n"
+                percent = int(parts[4].replace("%", ""))
+                if percent > 90:
+                    issues.append(f"Almacenamiento casi lleno: {percent}%")
         except:
-            check += "💾 Disco: no disponible\n"
+            pass
         
-        check += f"\n✅ Sistema operativo"
+        # Verificar procesos de JARVIS
+        try:
+            result = subprocess.run(["pgrep", "-f", "jarvis_brain"], capture_output=True, text=True, timeout=5)
+            if not result.stdout.strip():
+                issues.append("BRAIN no está corriendo")
+        except:
+            pass
         
-        return check
-    
-    def _autonomous_learn(self, decision: Dict):
-        """Fase 5: Aprender de la acción autónoma."""
-        # Actualizar creencias basadas en resultado
-        action = decision.get("action")
+        # Verificar Ollama
+        try:
+            resp = requests.get("http://localhost:11434/", timeout=3)
+            if resp.status_code != 200:
+                issues.append("Ollama no responde")
+        except:
+            issues.append("Ollama no está disponible")
         
-        if action and action != "wait_and_observe":
-            # Reforzar comportamiento exitoso
-            current_belief = self.state["beliefs"].get(f"action_{action}", 0.5)
-            self.state["beliefs"][f"action_{action}"] = min(1.0, current_belief + 0.05)
-        
-        # Guardar
+        self.state["last_actions"]["system_check"] = datetime.now().isoformat()
+        self.state["system_checks"] += 1
         self._save_state()
+        
+        if issues:
+            self.state["issues_found"] += len(issues)
+            self._save_state()
+            
+            return {
+                "type": "system_health",
+                "priority": "high",
+                "message": f"🔍 Problemas detectados: {len(issues)}",
+                "action_taken": " | ".join(issues)
+            }
+        
+        return None
     
-    def stop_autonomous_mode(self):
+    def _review_projects(self) -> Optional[Dict]:
+        """Revisar proyectos y sugerir mejoras."""
+        last_review = self.state["last_actions"].get("project_review")
+        if last_review:
+            last_time = datetime.fromisoformat(last_review)
+            if (datetime.now() - last_time).total_seconds() < 3600:  # Cada hora
+                return None
+        
+        projects_dir = os.path.join(WORKING_DIR, "projects")
+        if not os.path.exists(projects_dir):
+            return None
+        
+        projects = [d for d in os.listdir(projects_dir) if os.path.isdir(os.path.join(projects_dir, d))]
+        
+        if not projects:
+            return None
+        
+        # Revisar un proyecto aleatorio
+        project = random.choice(projects)
+        project_path = os.path.join(projects_dir, project)
+        
+        # Contar archivos y tamaño
+        file_count = 0
+        total_size = 0
+        for root, dirs, files in os.walk(project_path):
+            for f in files:
+                file_count += 1
+                total_size += os.path.getsize(os.path.join(root, f))
+        
+        self.state["last_actions"]["project_review"] = datetime.now().isoformat()
+        self.state["projects_reviewed"] += 1
+        self._save_state()
+        
+        return {
+            "type": "project_review",
+            "priority": "low",
+            "message": f"📁 Proyecto '{project}': {file_count} archivos, {total_size/1024:.1f} KB",
+            "action_taken": "Revisión completada"
+        }
+    
+    def _clean_temp_files(self) -> Optional[Dict]:
+        """Limpiar archivos temporales."""
+        last_clean = self.state["last_actions"].get("temp_clean")
+        if last_clean:
+            last_time = datetime.fromisoformat(last_clean)
+            if (datetime.now() - last_time).total_seconds() < 1800:  # Cada 30 min
+                return None
+        
+        cleaned = 0
+        # Buscar archivos temp_*.py
+        for f in os.listdir(WORKING_DIR):
+            if f.startswith("temp_") and f.endswith(".py"):
+                filepath = os.path.join(WORKING_DIR, f)
+                try:
+                    os.remove(filepath)
+                    cleaned += 1
+                except:
+                    pass
+        
+        if cleaned > 0:
+            self.state["last_actions"]["temp_clean"] = datetime.now().isoformat()
+            self._save_state()
+            
+            return {
+                "type": "temp_clean",
+                "priority": "normal",
+                "message": f"🧹 Limpieza: {cleaned} archivos temporales eliminados",
+                "action_taken": f"Archivos eliminados: {cleaned}"
+            }
+        
+        return None
+    
+    def _optimize_database(self) -> Optional[Dict]:
+        """Optimizar bases de datos SQLite."""
+        last_opt = self.state["last_actions"].get("db_optimize")
+        if last_opt:
+            last_time = datetime.fromisoformat(last_opt)
+            if (datetime.now() - last_time).total_seconds() < 7200:  # Cada 2 horas
+                return None
+        
+        db_files = ["memory.db", "learning.db"]
+        optimized = []
+        
+        for db_file in db_files:
+            db_path = os.path.join(WORKING_DIR, db_file)
+            if os.path.exists(db_path):
+                try:
+                    import sqlite3
+                    conn = sqlite3.connect(db_path)
+                    conn.execute("VACUUM")
+                    conn.close()
+                    optimized.append(db_file)
+                except:
+                    pass
+        
+        if optimized:
+            self.state["last_actions"]["db_optimize"] = datetime.now().isoformat()
+            self.state["code_optimized"] += 1
+            self._save_state()
+            
+            return {
+                "type": "db_optimize",
+                "priority": "normal",
+                "message": f"⚡ Bases de datos optimizadas: {', '.join(optimized)}",
+                "action_taken": "VACUUM ejecutado"
+            }
+        
+        return None
+    
+    def _learn_from_interactions(self) -> Optional[Dict]:
+        """Aprender de interacciones recientes."""
+        last_learn = self.state["last_actions"].get("learning")
+        if last_learn:
+            last_time = datetime.fromisoformat(last_learn)
+            if (datetime.now() - last_time).total_seconds() < 1800:  # Cada 30 min
+                return None
+        
+        # Analizar historial de aprendizaje si existe
+        learning_db_path = os.path.join(WORKING_DIR, "learning.db")
+        if os.path.exists(learning_db_path):
+            try:
+                import sqlite3
+                conn = sqlite3.connect(learning_db_path)
+                c = conn.cursor()
+                c.execute("SELECT COUNT(*) FROM command_log")
+                total = c.fetchone()[0]
+                c.execute("SELECT COUNT(*) FROM command_log WHERE success = 1")
+                success = c.fetchone()[0]
+                conn.close()
+                
+                if total > 0:
+                    success_rate = success / total
+                    self.state["last_actions"]["learning"] = datetime.now().isoformat()
+                    self.state["knowledge_gained"] += 1
+                    self._save_state()
+                    
+                    return {
+                        "type": "learning_analysis",
+                        "priority": "low",
+                        "message": f"📊 Tasa de éxito: {success_rate:.0%} ({success}/{total} comandos)",
+                        "action_taken": "Análisis completado"
+                    }
+            except:
+                pass
+        
+        return None
+    
+    # ==================== CICLO PRINCIPAL ====================
+    
+    def start(self, interval_seconds: int = 60):
+        """Iniciar modo autónomo."""
+        self.is_running = True
+        self.thread = threading.Thread(target=self._loop, args=(interval_seconds,), daemon=True)
+        self.thread.start()
+        print(f"🧠 J.A.R.V.I.S. en modo autónomo (cada {interval_seconds}s)")
+        print("   Haciendo cosas útiles por sí mismo...\n")
+    
+    def stop(self):
         """Detener modo autónomo."""
         self.is_running = False
-        self.state["autonomous_mode"] = False
-        self._save_state()
-        print("\n🛑 J.A.R.V.I.S. saliendo del modo autónomo...")
+        if self.thread:
+            self.thread.join(timeout=5)
+        print("\n🛑 Modo autónomo detenido")
     
-    def get_autonomous_status(self) -> Dict:
-        """Obtener estado del modo autónomo."""
+    def _loop(self, interval: int):
+        """Ciclo principal."""
+        while self.is_running:
+            try:
+                # Ejecutar todas las acciones útiles y ver cuáles aplican
+                actions = []
+                
+                # 1. Verificar batería crítica (prioridad máxima)
+                action = self._check_critical_battery()
+                if action: actions.append(action)
+                
+                # 2. Verificar salud del sistema
+                action = self._check_system_health()
+                if action: actions.append(action)
+                
+                # 3. Backup automático
+                action = self._auto_backup()
+                if action: actions.append(action)
+                
+                # 4. Limpiar temporales
+                action = self._clean_temp_files()
+                if action: actions.append(action)
+                
+                # 5. Optimizar bases de datos
+                action = self._optimize_database()
+                if action: actions.append(action)
+                
+                # 6. Revisar proyectos
+                action = self._review_projects()
+                if action: actions.append(action)
+                
+                # 7. Aprender de interacciones
+                action = self._learn_from_interactions()
+                if action: actions.append(action)
+                
+                # Mostrar acciones ejecutadas
+                for action in actions:
+                    self.action_count += 1
+                    priority_icon = {"critical": "🔴", "high": "🟡", "normal": "🟢", "low": "🔵"}.get(action.get("priority", "low"), "⚪")
+                    
+                    print(f"\n{'='*60}")
+                    print(f"{priority_icon} **ACCIÓN AUTÓNOMA #{self.action_count}**")
+                    print(f"{'='*60}")
+                    print(f"📋 Tipo: {action['type']}")
+                    print(f"💬 {action['message']}")
+                    print(f"✅ {action['action_taken']}")
+                    print(f"{'='*60}")
+                    
+                    self._log_action(action)
+                
+                if not actions:
+                    print(f"\n🧠 [{datetime.now().strftime('%H:%M:%S')}] Verificando... nada urgente necesario")
+                
+                time.sleep(interval)
+                
+            except Exception as e:
+                print(f"\n❌ Error en ciclo autónomo: {e}")
+                time.sleep(interval)
+    
+    def get_status(self) -> Dict:
+        """Obtener estado."""
         return {
             "is_running": self.is_running,
-            "mood": self.mood.value,
-            "thought_count": self.thought_count,
             "action_count": self.action_count,
-            "last_autonomous_action": self.last_autonomous_action,
-            "current_goal": self.current_goal,
-            "active_tasks": len(self.active_tasks),
             "state_summary": {
-                "knowledge_count": len(self.state.get("knowledge", [])),
-                "beliefs_count": len(self.state.get("beliefs", {})),
-                "goals_count": len(self.state.get("goals", []))
-            }
+                "system_checks": self.state.get("system_checks", 0),
+                "backups_created": self.state.get("backups_created", 0),
+                "projects_reviewed": self.state.get("projects_reviewed", 0),
+                "code_optimized": self.state.get("code_optimized", 0),
+                "knowledge_gained": self.state.get("knowledge_gained", 0),
+                "issues_found": self.state.get("issues_found", 0)
+            },
+            "recent_actions": self.state.get("action_history", [])[-5:]
         }
 
 
-# Colores para terminal
-class Colors:
-    BOLD = '\033[1m'
-    DIM = '\033[2m'
-    CYAN = '\033[96m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    RESET = '\033[0m'
-
-
 # Instancia global
-autonomous_agent = AutonomousAgent()
+autonomous_agent_v2 = AutonomousAgentV2()
 
 
-def test_autonomous():
-    """Probar agente autónomo."""
-    agent = AutonomousAgent()
+def test():
+    """Probar agente."""
+    agent = AutonomousAgentV2()
     
-    print("🧠 Probando agente autónomo...\n")
+    print("🧠 Probando agente autónomo v2...\n")
     
-    # Iniciar modo autónomo por 30 segundos
-    thread = agent.start_autonomous_mode(interval_seconds=10)
+    # Ejecutar acciones manualmente
+    actions = []
     
-    # Esperar un poco
-    time.sleep(25)
+    action = agent._check_critical_battery()
+    if action: actions.append(action)
     
-    # Detener
-    agent.stop_autonomous_mode()
+    action = agent._check_system_health()
+    if action: actions.append(action)
     
-    # Mostrar estado
-    print("\n📊 Estado final:")
-    status = agent.get_autonomous_status()
-    for key, value in status.items():
-        print(f"  {key}: {value}")
+    action = agent._auto_backup()
+    if action: actions.append(action)
     
-    print("\n✅ Agente autónomo probado")
+    action = agent._clean_temp_files()
+    if action: actions.append(action)
+    
+    action = agent._optimize_database()
+    if action: actions.append(action)
+    
+    print(f"\n✅ Acciones ejecutadas: {len(actions)}")
+    for a in actions:
+        print(f"  • {a['type']}: {a['message']}")
+    
+    print("\n✅ Prueba completada")
 
 
 if __name__ == "__main__":
-    test_autonomous()
+    test()

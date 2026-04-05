@@ -1,0 +1,1812 @@
+{
+  "personality": {
+    "curiosity": 0.8,
+    "creativity": 0.7,
+    "proactivity": 0.9,
+    "caution": 0.5,
+    "humor": 0.6
+  },
+  "knowledge": [
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T00:37:22.315695",
+      "confidence": 0.6403436298181592
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T00:39:01.946090",
+      "confidence": 0.7801984353141149
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T00:40:08.589946",
+      "confidence": 0.7015980768198655
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T00:40:41.913114",
+      "confidence": 0.6888235157120105
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T00:45:02.472181",
+      "confidence": 0.8106638529061317
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T00:46:44.053656",
+      "confidence": 0.8543195964752723
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T00:47:35.739111",
+      "confidence": 0.6412286149663271
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T00:48:09.083566",
+      "confidence": 0.894602308440138
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T00:48:59.313171",
+      "confidence": 0.8116972906371305
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T00:53:27.631768",
+      "confidence": 0.6785812690597323
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T00:56:34.502546",
+      "confidence": 0.7275673537836472
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T00:57:24.524888",
+      "confidence": 0.7336198626513315
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T00:58:14.512979",
+      "confidence": 0.6154788702156883
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T00:59:57.754774",
+      "confidence": 0.8288052831515463
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T01:00:47.762476",
+      "confidence": 0.6443494898057854
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T01:02:11.523226",
+      "confidence": 0.6333254717706097
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T01:02:50.946649",
+      "confidence": 0.7604261834136448
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T01:08:16.440866",
+      "confidence": 0.8087689083581562
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T01:09:31.142488",
+      "confidence": 0.8552824244464519
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T01:11:30.406094",
+      "confidence": 0.8553018437658404
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T01:11:47.419201",
+      "confidence": 0.7973094544646098
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T01:12:04.294918",
+      "confidence": 0.8053553283517181
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T01:13:30.190676",
+      "confidence": 0.8523604896624828
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T01:15:47.792029",
+      "confidence": 0.880352395908105
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T01:16:04.753804",
+      "confidence": 0.7774097282950156
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T01:17:29.517116",
+      "confidence": 0.6508030613759265
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T01:18:03.487410",
+      "confidence": 0.7118835313276035
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T01:21:08.642775",
+      "confidence": 0.6522891602261955
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T01:23:06.152664",
+      "confidence": 0.6722688496573359
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T01:24:46.827050",
+      "confidence": 0.7115048695580833
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T01:26:45.564558",
+      "confidence": 0.8655647939248472
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T01:27:02.353045",
+      "confidence": 0.8744482868929759
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T01:29:34.458348",
+      "confidence": 0.7433078117645853
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T01:30:24.430356",
+      "confidence": 0.6234365429346808
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T01:34:18.711611",
+      "confidence": 0.856408083991034
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T01:34:51.994576",
+      "confidence": 0.8082841340691437
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T01:37:42.299616",
+      "confidence": 0.6895502020916306
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T01:38:15.285543",
+      "confidence": 0.6662588564052826
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T01:38:31.819562",
+      "confidence": 0.7562984762002956
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T01:39:21.497693",
+      "confidence": 0.7278366931759734
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T01:42:58.501171",
+      "confidence": 0.7034163045006764
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T01:44:21.372169",
+      "confidence": 0.7088097158215703
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T01:45:27.565061",
+      "confidence": 0.7419232002494405
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T01:49:55.042723",
+      "confidence": 0.6395359573981382
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T01:50:28.040035",
+      "confidence": 0.8535679177660567
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T01:52:40.469658",
+      "confidence": 0.7356901326607551
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T01:53:31.668980",
+      "confidence": 0.7466138192184486
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T01:56:18.982322",
+      "confidence": 0.8447471671103782
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T01:56:35.557197",
+      "confidence": 0.6108988744231486
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T01:56:52.158513",
+      "confidence": 0.7338076869113351
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T01:58:31.309165",
+      "confidence": 0.8851764700164636
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T01:58:47.723739",
+      "confidence": 0.672585422949405
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T01:59:04.239167",
+      "confidence": 0.8388401635213724
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T02:02:41.996037",
+      "confidence": 0.8590542824399319
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T02:06:01.874782",
+      "confidence": 0.6094420825535534
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T02:07:07.967764",
+      "confidence": 0.6511141088816775
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T02:11:01.187058",
+      "confidence": 0.6123187395481985
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T02:11:17.806010",
+      "confidence": 0.7516923880228842
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T02:12:24.064564",
+      "confidence": 0.8876247222770096
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T02:12:58.744866",
+      "confidence": 0.7190180836744603
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T02:15:44.646118",
+      "confidence": 0.6295554614580848
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T02:20:29.195360",
+      "confidence": 0.6560237939631639
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T02:20:45.732213",
+      "confidence": 0.8426261226747489
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T02:22:41.605347",
+      "confidence": 0.7365753257975018
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T02:23:14.633708",
+      "confidence": 0.8351475741390906
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T02:24:20.845493",
+      "confidence": 0.6629807173546546
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T02:26:32.978182",
+      "confidence": 0.801892422484542
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T02:29:39.524794",
+      "confidence": 0.6130295531517133
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T02:32:12.663678",
+      "confidence": 0.8273893974270141
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T02:32:29.253807",
+      "confidence": 0.7345404228622918
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T02:33:18.954500",
+      "confidence": 0.8388625492904715
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T02:35:49.728923",
+      "confidence": 0.7985021485828798
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T02:38:51.521753",
+      "confidence": 0.7990384443215377
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T02:41:05.557649",
+      "confidence": 0.6941887149380613
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T02:43:01.638184",
+      "confidence": 0.6418324564713939
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T02:44:07.654639",
+      "confidence": 0.6511112672384602
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T02:47:09.816299",
+      "confidence": 0.7047311893909626
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T02:47:42.904936",
+      "confidence": 0.8839563466089041
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T02:48:50.809591",
+      "confidence": 0.7388953788058972
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T02:50:46.779086",
+      "confidence": 0.8057550561818575
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T02:52:44.474009",
+      "confidence": 0.8699940528676751
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T02:54:23.837967",
+      "confidence": 0.6135100491152073
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T02:54:56.981295",
+      "confidence": 0.7634079519114182
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T02:56:06.420401",
+      "confidence": 0.8239067153205557
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T02:57:12.413883",
+      "confidence": 0.858061096075059
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T02:58:18.630872",
+      "confidence": 0.6413900672389059
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T02:59:58.120783",
+      "confidence": 0.6162383628661772
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:00:49.537379",
+      "confidence": 0.7834514034967381
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:02:29.004870",
+      "confidence": 0.730213480277545
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:04:08.117508",
+      "confidence": 0.7768121722427864
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T03:05:14.472803",
+      "confidence": 0.7790111898059218
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T03:06:20.578666",
+      "confidence": 0.7290221539553923
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T03:11:56.242689",
+      "confidence": 0.6808942335285352
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:17:33.773787",
+      "confidence": 0.6769432604516148
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T03:24:14.533596",
+      "confidence": 0.7125999422638214
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:24:31.120954",
+      "confidence": 0.667093785392012
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T03:24:47.704734",
+      "confidence": 0.672942242552355
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T03:32:21.172997",
+      "confidence": 0.8382829917774086
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T03:35:10.108984",
+      "confidence": 0.7859105281752987
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:38:13.276321",
+      "confidence": 0.6253140395562556
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T03:41:00.361797",
+      "confidence": 0.7030373948450187
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:42:24.887757",
+      "confidence": 0.8603928488012554
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T03:44:04.091663",
+      "confidence": 0.8485870192453029
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:44:20.681080",
+      "confidence": 0.7402162756867707
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T03:47:41.361564",
+      "confidence": 0.6413459003304011
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T03:49:55.612270",
+      "confidence": 0.7057889164828137
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T03:55:46.722663",
+      "confidence": 0.6657730595564664
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:56:03.329702",
+      "confidence": 0.8093372608326275
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T03:59:05.187553",
+      "confidence": 0.7692543232303312
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T03:59:38.388655",
+      "confidence": 0.600634899793386
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T03:59:54.936942",
+      "confidence": 0.6453043827668725
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T04:01:34.308149",
+      "confidence": 0.8535823067239123
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T04:02:24.178034",
+      "confidence": 0.720598601547196
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T04:03:48.372701",
+      "confidence": 0.8660466703218288
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T04:04:04.989484",
+      "confidence": 0.7143169153542979
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T04:06:52.833717",
+      "confidence": 0.7945569358893527
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T04:08:17.401696",
+      "confidence": 0.886887608722579
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:09:08.753243",
+      "confidence": 0.8456571306774977
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T04:10:51.132921",
+      "confidence": 0.631099733144447
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T04:11:40.649274",
+      "confidence": 0.764951646603736
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T04:11:57.214506",
+      "confidence": 0.8633222970778891
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T04:13:36.799225",
+      "confidence": 0.8124028339777442
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T04:15:49.265926",
+      "confidence": 0.7210399254691217
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T04:16:05.935772",
+      "confidence": 0.8679735847379599
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:16:22.648160",
+      "confidence": 0.8367492101223091
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T04:18:02.082705",
+      "confidence": 0.8795954892786748
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T04:20:31.216716",
+      "confidence": 0.6954888904983912
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:21:04.299702",
+      "confidence": 0.8712140459806703
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T04:25:14.336720",
+      "confidence": 0.7904272196190372
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:26:04.180285",
+      "confidence": 0.7578125924109969
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T04:27:10.425708",
+      "confidence": 0.7454169489395981
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T04:29:57.992943",
+      "confidence": 0.7484899529613331
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T04:32:11.961480",
+      "confidence": 0.6048469446763803
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T04:33:01.688048",
+      "confidence": 0.8661985173000383
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T04:33:34.978682",
+      "confidence": 0.873269648940903
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:36:06.360096",
+      "confidence": 0.8696522010190901
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T04:37:45.439570",
+      "confidence": 0.8315927485776707
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T04:39:59.802991",
+      "confidence": 0.6192783992344648
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:43:19.348856",
+      "confidence": 0.6402167805828402
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:45:16.766201",
+      "confidence": 0.8315410791964922
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T04:47:32.630745",
+      "confidence": 0.7880819499619193
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:47:49.251392",
+      "confidence": 0.7303724260080633
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T04:48:55.702248",
+      "confidence": 0.8821661711489178
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T04:52:02.865101",
+      "confidence": 0.7241960391956498
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:52:35.994189",
+      "confidence": 0.6043901956936277
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T04:53:42.280099",
+      "confidence": 0.6837843088429494
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T04:54:48.552262",
+      "confidence": 0.8945171618113759
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T05:00:53.122940",
+      "confidence": 0.8011569296907728
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T05:03:09.148648",
+      "confidence": 0.6952216955872799
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T05:04:15.813963",
+      "confidence": 0.7342789382998585
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T05:05:22.313620",
+      "confidence": 0.7769044744208822
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T05:05:55.571053",
+      "confidence": 0.7265675870839519
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T05:07:21.538912",
+      "confidence": 0.8062282669554202
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T05:08:44.456746",
+      "confidence": 0.8074653101646498
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T05:11:13.531448",
+      "confidence": 0.849993055654124
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T05:11:48.333029",
+      "confidence": 0.7208340972207092
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T05:14:52.589379",
+      "confidence": 0.7217599473374524
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T05:18:13.514496",
+      "confidence": 0.6032049730682391
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T05:18:30.146173",
+      "confidence": 0.8966123637714991
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T05:19:56.451839",
+      "confidence": 0.683728739677326
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T05:20:29.684469",
+      "confidence": 0.788640334392963
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T05:23:15.507640",
+      "confidence": 0.7213549779092322
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T05:24:05.138352",
+      "confidence": 0.8632637011024361
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T05:24:21.742833",
+      "confidence": 0.6466037097047571
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T05:25:44.657205",
+      "confidence": 0.6735441252501744
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T05:26:34.314322",
+      "confidence": 0.8065582069267967
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T05:32:09.056853",
+      "confidence": 0.8587394344288967
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T05:32:42.301773",
+      "confidence": 0.6367446651440177
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T05:33:50.190020",
+      "confidence": 0.821523769449545
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T05:34:41.690615",
+      "confidence": 0.6909079357814519
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T05:34:58.298973",
+      "confidence": 0.7594670509369872
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T05:36:22.992836",
+      "confidence": 0.8569908870679175
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T05:36:39.606068",
+      "confidence": 0.8152441451667303
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T05:36:56.045146",
+      "confidence": 0.8951509362892645
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T05:37:47.260416",
+      "confidence": 0.7577731436936382
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T05:40:39.298823",
+      "confidence": 0.8857856452840787
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T05:43:29.537753",
+      "confidence": 0.6674778595424107
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T05:46:48.264718",
+      "confidence": 0.71184629136287
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T05:47:55.899725",
+      "confidence": 0.6880957915282688
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T05:51:17.704794",
+      "confidence": 0.8097250750488916
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T05:52:08.859026",
+      "confidence": 0.7052864392756484
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T05:52:41.884812",
+      "confidence": 0.6754111471000225
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T06:00:28.708375",
+      "confidence": 0.6444867508781504
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:01:01.935139",
+      "confidence": 0.7054564860621675
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T06:02:24.618077",
+      "confidence": 0.6159773007173289
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T06:02:41.178666",
+      "confidence": 0.6915088368385335
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:05:11.657595",
+      "confidence": 0.7778317160159041
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T06:08:33.193127",
+      "confidence": 0.7093607146889043
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:12:41.681103",
+      "confidence": 0.6126128873528953
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T06:14:20.839557",
+      "confidence": 0.6718992012244747
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T06:15:12.103450",
+      "confidence": 0.8032322742226303
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T06:26:36.453500",
+      "confidence": 0.6961947481216775
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T06:30:11.146198",
+      "confidence": 0.8808565297846944
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T06:30:44.216183",
+      "confidence": 0.6400340746175862
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:31:00.651592",
+      "confidence": 0.7542225333819103
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:32:23.525373",
+      "confidence": 0.8405980612531849
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T06:34:37.473420",
+      "confidence": 0.6740220373787835
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:34:54.048755",
+      "confidence": 0.6782157650641424
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T06:36:00.280825",
+      "confidence": 0.7865322577788372
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T06:37:06.489505",
+      "confidence": 0.7454613326531631
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T06:39:18.664390",
+      "confidence": 0.8653354273572706
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:39:35.231410",
+      "confidence": 0.6275898599427946
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:40:44.372303",
+      "confidence": 0.7228461449322499
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:44:35.880740",
+      "confidence": 0.715205653332895
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T06:44:52.280773",
+      "confidence": 0.7408495099209575
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T06:46:32.648849",
+      "confidence": 0.6070877454278256
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T06:47:05.753349",
+      "confidence": 0.6512265206520994
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T06:47:22.314345",
+      "confidence": 0.8222478743707295
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T06:47:38.896738",
+      "confidence": 0.8829886731559071
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T06:50:40.969664",
+      "confidence": 0.8070038121000671
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T06:52:21.578749",
+      "confidence": 0.7811802677246714
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T06:54:36.827193",
+      "confidence": 0.8010972867443944
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T06:56:50.893634",
+      "confidence": 0.6744601510964988
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T06:57:23.928459",
+      "confidence": 0.6168687247054935
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T06:59:36.247151",
+      "confidence": 0.8158128177937051
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:03:13.754443",
+      "confidence": 0.6221079953176522
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:04:19.889873",
+      "confidence": 0.6394775913461447
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T07:05:42.582647",
+      "confidence": 0.8916374799928944
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T07:09:54.991517",
+      "confidence": 0.6164081007479681
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T07:10:11.529713",
+      "confidence": 0.6744829074016999
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T07:11:01.107751",
+      "confidence": 0.66793914017727
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:13:16.701981",
+      "confidence": 0.7389106460792154
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:16:21.713057",
+      "confidence": 0.8954146809075041
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:16:54.663638",
+      "confidence": 0.7890562962559341
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:19:08.529068",
+      "confidence": 0.8207060128441365
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T07:19:43.184548",
+      "confidence": 0.7815474048154681
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T07:20:17.809750",
+      "confidence": 0.7295899564399567
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T07:20:34.231724",
+      "confidence": 0.8772725643824482
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T07:21:07.452828",
+      "confidence": 0.7701867523772311
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T07:27:15.634412",
+      "confidence": 0.7466304802616635
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T07:28:23.186281",
+      "confidence": 0.6977025456490262
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T07:28:56.312341",
+      "confidence": 0.7352379819282565
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T07:30:02.468728",
+      "confidence": 0.7067457568822673
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T07:31:44.458197",
+      "confidence": 0.8583194155639065
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:34:00.757359",
+      "confidence": 0.887437355035654
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T07:34:17.317635",
+      "confidence": 0.6431803712042338
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:37:20.805641",
+      "confidence": 0.6352122824656529
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T07:40:07.974865",
+      "confidence": 0.6759070228164845
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T07:43:11.075861",
+      "confidence": 0.7052689322822544
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T07:44:33.766008",
+      "confidence": 0.6800035681974855
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T07:45:06.920643",
+      "confidence": 0.7354182594594324
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T07:45:23.531846",
+      "confidence": 0.7081135909162785
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T07:45:40.082102",
+      "confidence": 0.6135046317992386
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T07:47:37.284597",
+      "confidence": 0.7761559007783232
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T07:48:10.449839",
+      "confidence": 0.8770564419464842
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T07:48:27.059716",
+      "confidence": 0.734556725119079
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:49:51.536485",
+      "confidence": 0.8597512931231066
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T07:50:57.814624",
+      "confidence": 0.8184092739095232
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T07:51:14.386777",
+      "confidence": 0.7182010281520776
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:53:43.105589",
+      "confidence": 0.8784261257607477
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T07:54:16.202686",
+      "confidence": 0.753850236247955
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:55:38.600406",
+      "confidence": 0.7276778343387056
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T07:56:44.733082",
+      "confidence": 0.7706599202237616
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T07:59:48.488457",
+      "confidence": 0.8174092835441658
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T08:01:44.529032",
+      "confidence": 0.7131211639998145
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T08:03:07.349962",
+      "confidence": 0.7084254718751861
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:05:21.012510",
+      "confidence": 0.6194705042446931
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T08:05:54.086958",
+      "confidence": 0.6901922168735573
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T08:09:15.780674",
+      "confidence": 0.6679611618703306
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T08:10:38.790560",
+      "confidence": 0.7583651561580149
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T08:12:01.716894",
+      "confidence": 0.7888551543885416
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T08:13:40.710383",
+      "confidence": 0.7190773282540173
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T08:16:26.146562",
+      "confidence": 0.6637990832952032
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T08:18:21.907460",
+      "confidence": 0.8410251570155055
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:19:28.109070",
+      "confidence": 0.8198059716108776
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T08:21:24.370536",
+      "confidence": 0.6110307058571404
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T08:23:38.005217",
+      "confidence": 0.7939482144562111
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T08:26:10.122159",
+      "confidence": 0.6264162369867738
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:26:43.143566",
+      "confidence": 0.6712881158173564
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T08:27:34.347780",
+      "confidence": 0.6535430414120187
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T08:28:07.550147",
+      "confidence": 0.7193862829057103
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:28:24.127870",
+      "confidence": 0.6330762106461695
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:30:19.940842",
+      "confidence": 0.7522962314591255
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T08:31:42.444729",
+      "confidence": 0.6839509809729141
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T08:31:59.012011",
+      "confidence": 0.7406612342524206
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T08:32:15.571096",
+      "confidence": 0.6416730951211372
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T08:35:36.360995",
+      "confidence": 0.7880033703090195
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:36:26.056203",
+      "confidence": 0.6521454713159034
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T08:38:24.240539",
+      "confidence": 0.7751649161915931
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T08:38:40.650082",
+      "confidence": 0.7615612316713394
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T08:38:57.227871",
+      "confidence": 0.8924062293890391
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T08:39:13.793146",
+      "confidence": 0.7863094591371919
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T08:40:03.514103",
+      "confidence": 0.7585378605127876
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T08:40:20.103875",
+      "confidence": 0.882110413860232
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:44:44.881519",
+      "confidence": 0.8006665891929875
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:46:07.369482",
+      "confidence": 0.7049068900589711
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:46:40.538941",
+      "confidence": 0.776126741040024
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:47:48.300484",
+      "confidence": 0.7658538204217523
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T08:49:27.651052",
+      "confidence": 0.6263340419806198
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T08:50:00.807645",
+      "confidence": 0.7510660328999686
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T08:53:20.466950",
+      "confidence": 0.6215993276101233
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T08:56:58.178143",
+      "confidence": 0.8966574538520002
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T08:57:14.663741",
+      "confidence": 0.8813520814060284
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T08:58:37.184155",
+      "confidence": 0.6858489972621449
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T09:03:53.240315",
+      "confidence": 0.6696177702753957
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T09:04:42.847525",
+      "confidence": 0.7644015643859156
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T09:12:50.389093",
+      "confidence": 0.8279955177364804
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T09:13:23.485026",
+      "confidence": 0.7093974981841108
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T09:13:56.436620",
+      "confidence": 0.8637719825118848
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T09:16:30.129192",
+      "confidence": 0.8729219652608444
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T09:17:54.404094",
+      "confidence": 0.6501124103060405
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T09:18:27.573974",
+      "confidence": 0.6803362195495919
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T09:18:44.111598",
+      "confidence": 0.6529251248218262
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T09:20:06.575704",
+      "confidence": 0.8447629458747653
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T09:21:29.384912",
+      "confidence": 0.7896518538579337
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T09:22:52.413308",
+      "confidence": 0.8909668386308929
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T09:26:44.231158",
+      "confidence": 0.6786902203772568
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T09:28:56.389864",
+      "confidence": 0.7080951838481477
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T09:31:10.688478",
+      "confidence": 0.8287750927448352
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T09:32:16.882659",
+      "confidence": 0.7780241148417901
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T09:32:57.047048",
+      "confidence": 0.8608455845605629
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T09:41:47.445156",
+      "confidence": 0.8768481559938175
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T09:43:43.170803",
+      "confidence": 0.7867865518014663
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T09:45:39.054227",
+      "confidence": 0.6147446184073705
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T09:47:51.251796",
+      "confidence": 0.7029278088550396
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T09:50:21.469647",
+      "confidence": 0.62337917155361
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T09:53:24.968213",
+      "confidence": 0.6174812095387336
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T09:53:41.383589",
+      "confidence": 0.6515486221451103
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T09:57:01.528240",
+      "confidence": 0.6315359254245243
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T09:57:51.007001",
+      "confidence": 0.6373857197021838
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T09:58:07.558919",
+      "confidence": 0.6485044737758482
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T10:04:13.204128",
+      "confidence": 0.7621335785939326
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T10:05:02.722107",
+      "confidence": 0.6729144175270074
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T10:05:19.374143",
+      "confidence": 0.6522239210573157
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T10:05:35.945588",
+      "confidence": 0.846449378597063
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T10:05:52.380511",
+      "confidence": 0.7274147248306764
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T10:08:22.837986",
+      "confidence": 0.6656211571146311
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T10:08:55.951514",
+      "confidence": 0.6366189933506924
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T10:10:18.844888",
+      "confidence": 0.6956791719572384
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T10:12:31.156665",
+      "confidence": 0.8594544609068098
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T10:13:04.257149",
+      "confidence": 0.6179437124028893
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T10:13:20.822329",
+      "confidence": 0.7684837616753613
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T10:15:53.158308",
+      "confidence": 0.6310323471431053
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T10:19:47.749752",
+      "confidence": 0.8553552454313982
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T10:21:26.850280",
+      "confidence": 0.6734259183104057
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T10:24:14.066394",
+      "confidence": 0.8296704903101051
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T10:27:35.731797",
+      "confidence": 0.7954617852940298
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T10:28:25.112949",
+      "confidence": 0.6581258864890819
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T10:28:58.302529",
+      "confidence": 0.7560893845004228
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T10:29:14.874769",
+      "confidence": 0.6413488897786839
+    },
+    {
+      "topic": "FastAPI best practices",
+      "learned_at": "2026-04-05T10:31:27.175379",
+      "confidence": 0.7063391168708153
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T10:33:25.550712",
+      "confidence": 0.8933501481959181
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T10:35:21.173462",
+      "confidence": 0.6663662032899528
+    },
+    {
+      "topic": "Python async/await",
+      "learned_at": "2026-04-05T10:45:39.943032",
+      "confidence": 0.8164314165693702
+    },
+    {
+      "topic": "Machine learning basics",
+      "learned_at": "2026-04-05T10:47:37.489175",
+      "confidence": 0.8613261174042095
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T10:51:31.102999",
+      "confidence": 0.7169224359267631
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T10:55:06.184220",
+      "confidence": 0.6816001285992128
+    },
+    {
+      "topic": "Git workflows",
+      "learned_at": "2026-04-05T10:57:20.195340",
+      "confidence": 0.8923156628712425
+    },
+    {
+      "topic": "Docker fundamentals",
+      "learned_at": "2026-04-05T11:03:26.551942",
+      "confidence": 0.6907630409418132
+    }
+  ],
+  "beliefs": {
+    "action_alert_low_battery": 1.0,
+    "action_learn_something_new": 1.0,
+    "action_system_check": 1.0,
+    "action_suggest_daily_plan": 0.55
+  },
+  "goals": [],
+  "memories": [],
+  "preferences": {},
+  "started_at": "2026-04-05T00:30:17.682451",
+  "last_active": "2026-04-05T11:04:15.153001",
+  "autonomous_mode": true,
+  "last_observation": {
+    "timestamp": "2026-04-05T11:04:13.753995",
+    "system_status": {
+      "status": "unknown",
+      "battery": 73,
+      "battery_status": "DISCHARGING"
+    },
+    "time_context": {
+      "period": "ma\u00f1ana",
+      "activity": "high",
+      "suggestion": "trabajar"
+    },
+    "user_activity": "unknown",
+    "pending_tasks": 0,
+    "mood": "focused"
+  },
+  "recent_thoughts": [
+    {
+      "type": "situaci\u00f3n_actual",
+      "content": "Sistema: bater\u00eda=73, hora=ma\u00f1ana",
+      "timestamp": "2026-04-05T11:04:15.144523",
+      "confidence": 0.7521628564773384
+    },
+    {
+      "type": "posibles_acciones",
+      "content": "Puedo usar: check_system, analyze_github, create_project, search_web, take_photo",
+      "timestamp": "2026-04-05T11:04:15.144556",
+      "confidence": 0.8798553497095569
+    },
+    {
+      "type": "aprendizaje_reciente",
+      "content": "Tengo 349 conocimientos almacenados",
+      "timestamp": "2026-04-05T11:04:15.144571",
+      "confidence": 0.6227155720652668
+    },
+    {
+      "type": "estado_interno",
+      "content": "Estado de \u00e1nimo: focused",
+      "timestamp": "2026-04-05T11:04:15.144579",
+      "confidence": 0.590381375643108
+    }
+  ],
+  "last_battery_alert": "2026-04-05T00:37:05.644479",
+  "last_daily_plan": "2026-04-05T06:00:12.153712"
+}
