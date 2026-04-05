@@ -46,6 +46,7 @@ from ironman_module import ironman_module, IronManModule
 from agent_core import agent_core, AgentCore
 from autonomous_agent import autonomous_agent, AutonomousAgent
 from model_manager import model_manager, ModelManager
+from complete_assistant import complete_assistant, CompleteAIAssistant
 
 # ==================== CONFIGURACIÓN ====================
 
@@ -203,17 +204,17 @@ class JARVISBrain:
     
     def process_command(self, command: str, interface: str = "api", 
                        user_id: Optional[int] = None, context: List = None) -> Dict:
-        """Procesar comando con agente de IA autónomo."""
+        """Procesar comando con asistente de IA completo."""
         start_time = time.time()
         
-        # 🧠 Usar Agent Core para procesamiento autónomo
-        agent_result = agent_core.process(command, context)
+        # 🧠 Usar asistente completo con múltiples modelos
+        result = complete_assistant.think_and_respond(command, context)
         
-        response = agent_result["response"]
+        response = result.get("response", "")
         execution_time = time.time() - start_time
         
         # Guardar en memoria compartida
-        if agent_result.get("agent_state", {}).get("tool_used"):
+        if response and not response.startswith("❌"):
             self.memory.add_short_term(command, f"command_{interface}")
             self.memory.add_conversation(user_id or 0, command, response)
             self.learning.log_command(command, True, execution_time, "positive")
@@ -233,11 +234,8 @@ class JARVISBrain:
             "execution_time": execution_time,
             "interface": interface,
             "timestamp": datetime.now().isoformat(),
-            "agent": agent_result.get("agent_state", {}),
-            "conversation": {
-                "is_follow_up": agent_result.get("agent_state", {}).get("understanding", {}).get("is_follow_up", False),
-                "history": agent_result.get("memory_summary", {}).get("recent_thoughts", [])
-            },
+            "model_used": result.get("model_used"),
+            "analysis": result.get("analysis", {}),
             "context": {"messages": self.memory.get_conversation_history(user_id or 0, 10)}
         }
     

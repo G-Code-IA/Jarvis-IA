@@ -1,0 +1,16 @@
+{
+  "default_model": "qwen2.5-coder:1.5b",
+  "task_models": {
+    "code": "qwen2.5-coder:1.5b",
+    "chat": "qwen2.5-coder:1.5b",
+    "reasoning": "qwen2.5-coder:1.5b",
+    "vision": "llava:7b",
+    "creative": "qwen2.5-coder:1.5b",
+    "translation": "qwen2.5-coder:1.5b",
+    "summarization": "qwen2.5-coder:1.5b"
+  },
+  "installed_models": [
+    "qwen2.5-coder:1.5b"
+  ],
+  "last_updated": "2026-04-05T11:12:44.770147"
+}
