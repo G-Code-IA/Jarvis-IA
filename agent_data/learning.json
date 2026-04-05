@@ -98,5 +98,38 @@
       "La estrategia funcion\u00f3 correctamente"
     ],
     "confidence": 0.7
+  },
+  {
+    "timestamp": "2026-04-05T00:00:25.664882",
+    "input": "crea una API web",
+    "intent": "command",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.6
+  },
+  {
+    "timestamp": "2026-04-05T00:04:26.215168",
+    "input": "crea una API",
+    "intent": "create_project",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.6
+  },
+  {
+    "timestamp": "2026-04-05T00:06:04.738889",
+    "input": "crea una API web",
+    "intent": "create_project",
+    "success": true,
+    "tool_used": null,
+    "reflection": [
+      "La estrategia funcion\u00f3 correctamente"
+    ],
+    "confidence": 0.6
   }
 ]

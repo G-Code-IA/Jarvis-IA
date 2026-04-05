@@ -406,6 +406,20 @@ class AgentCore:
             else:
                 plan["steps"] = ["Responder que no puedo ejecutar eso"]
         
+        elif intent == "create_project":
+            plan["steps"] = [
+                "Comprender la solicitud del usuario",
+                "Planificar arquitectura del proyecto",
+                "Generar cada archivo con IA",
+                "Crear estructura de directorios",
+                "Escribir contenido de archivos",
+                "Verificar proyecto creado",
+                "Generar instrucciones de uso"
+            ]
+            plan["estimated_steps"] = 7
+            plan["requires_tools"] = True
+            plan["tools_needed"].append("create_project")
+        
         elif intent == "analysis":
             plan["steps"] = [
                 "Analizar entrada en detalle",
@@ -584,8 +598,8 @@ class AgentCore:
     def _classify_intent(self, msg_lower: str) -> str:
         """Clasificar la intención del mensaje."""
         # Proyectos primero (antes que greeting)
-        if any(x in msg_lower for x in ["crea un proyecto", "crear proyecto", "crea una app", "crear una app", "crea un juego", "crear un juego", "crea una api", "crear una api", "crea un programa", "crear un programa"]):
-            return "command"
+        if any(x in msg_lower for x in ["crea un proyecto", "crear proyecto", "crea una app", "crear una app", "crea un juego", "crear un juego", "crea una api", "crear una api", "crea un programa", "crear un programa", "crea una web", "crear una web"]):
+            return "create_project"
         if any(x in msg_lower for x in ["hola", "hey", "buenas", "buenos"]):
             return "greeting"
         if any(x in msg_lower for x in ["gracias", "thanks"]):
@@ -745,7 +759,7 @@ class AgentCore:
             return "list_plugins"
         if any(x in msg_lower for x in ["foto", "cámara"]):
             return "take_photo"
-        if any(x in msg_lower for x in ["crea un proyecto", "crear proyecto", "crea una app", "crear una app", "crea un juego"]):
+        if any(x in msg_lower for x in ["crea", "crear"]) and any(x in msg_lower for x in ["proyecto", "app", "juego", "api", "programa", "web"]):
             return "create_project"
         if any(x in msg_lower for x in ["plantillas", "templates", "qué proyectos"]):
             return "list_templates"
@@ -811,21 +825,23 @@ class AgentCore:
                 return {"success": result is not None, "response": result or "❌ No se pudo tomar foto"}
             
             elif tool_name == "create_project":
-                from project_generator import project_generator
-                project = project_generator.create_project(user_input)
+                from autonomous_builder import autonomous_builder
+                result = autonomous_builder.think_and_build(user_input)
                 
-                if project.get("success"):
-                    response = f"✅ **Proyecto creado: {project['name']}**\n\n"
-                    response += f"📦 Tipo: {project['type']}\n"
-                    response += f"📄 Archivos: {project['file_count']}\n"
-                    response += f"💾 Tamaño: {project['total_size']/1024:.1f} KB\n"
-                    response += f"📁 Directorio: `{project['directory']}`\n\n"
-                    response += "**Archivos creados:**\n"
-                    for f in project['created_files'][:10]:
-                        response += f"  • {f}\n"
-                    if len(project['created_files']) > 10:
-                        response += f"  ... y {len(project['created_files'])-10} más\n"
-                    response += f"\n{project.get('instructions', '')}"
+                if result.get("success"):
+                    response = f"🧠 **Pensé y construí el proyecto:**\n\n"
+                    response += f"✅ **{result['name']}** creado exitosamente\n\n"
+                    response += f"📦 Tipo: {result['type']}\n"
+                    response += f"📄 Archivos: {result['file_count']}\n"
+                    response += f"💾 Tamaño: {result.get('verification', {}).get('total_size', 0)/1024:.1f} KB\n"
+                    response += f"📁 Directorio: `{result['directory']}`\n\n"
+                    response += "**🧠 Mi proceso de pensamiento:**\n"
+                    for t in result.get('thoughts', [])[:5]:
+                        response += f"  • {t['thought']}\n"
+                    response += f"\n**Archivos generados:**\n"
+                    for f in result['files']:
+                        response += f"  ✅ {f}\n"
+                    response += f"\n{result.get('instructions', '')}"
                     return {"success": True, "response": response}
                 return {"success": False, "response": "❌ No se pudo crear el proyecto"}
             
